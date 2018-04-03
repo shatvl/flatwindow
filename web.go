@@ -1,9 +1,6 @@
 package main
 
 import (
-	"github.com/shatvl/flatwindow/parser"
-	"github.com/shatvl/flatwindow/routes"
-
 	"github.com/kataras/iris"
 	mgo "gopkg.in/mgo.v2"
 )
@@ -11,11 +8,12 @@ import (
 func main() {
 	app := iris.New()
 
-	routes.DeclareRoutes(app, getSession())
+	//	routes.DeclareRoutes(app, getSession())
 
 	// Method:   GET
 	app.Handle("GET", "/", func(ctx iris.Context) {
-		parser.NewParser().Parse(getSession())
+		//		parser.NewParser().Parse(getSession())
+		ctx.Writef("LOL HI, AHAHAHAH")
 	})
 
 	app.Run(
@@ -27,14 +25,13 @@ func main() {
 }
 
 func getSession() *mgo.Session {
-	// session, err := mgo.Dial("mongodb://localhost:27017/irn")
+	session, err := mgo.Dial("mongodb://localhost:27017/irn")
 
-	// if err != nil {
-	// 	panic(err)
-	// }
+	if err != nil {
+		panic(err)
+	}
 
-	// session.SetMode(mgo.Monotonic, true)
+	session.SetMode(mgo.Monotonic, true)
 
-	// return session
-	return "124"
+	return session
 }
