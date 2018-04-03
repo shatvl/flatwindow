@@ -1,1 +1,1 @@
-web: flatwindow $PORT=8081
+web: flatwindow
