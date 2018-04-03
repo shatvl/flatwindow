@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+
+	mgo "gopkg.in/mgo.v2"
 )
 
 type Uedb struct {
@@ -67,7 +69,7 @@ func NewParser() *TSParser {
 	return &TSParser{}
 }
 
-func (ts *TSParser) Parse() {
+func (ts *TSParser) Parse(session *mgo.Session) {
 	xmlFeed, err := getXML("http://crm.t-s.by/xml/xml_flats_kufar_kml.php")
 
 	if err != nil {
@@ -84,6 +86,7 @@ func (ts *TSParser) Parse() {
 	}
 
 	for i := 0; i < len(uedb.Records.Records); i++ {
+		session.DB("").C("ads").Insert(uedb.Records.Records[i])
 		fmt.Println("Record subject: " + uedb.Records.Records[i].Subject)
 	}
 }

@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"flatwindow/config"
-	"flatwindow/models"
+	"github.com/shatvl/flatwindow/config"
+	"github.com/shatvl/flatwindow/models"
 
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

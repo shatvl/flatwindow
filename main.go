@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flatwindow/parser"
-	"flatwindow/routes"
+	"github.com/shatvl/flatwindow/parser"
+	"github.com/shatvl/flatwindow/routes"
 
 	"github.com/kataras/iris"
 	mgo "gopkg.in/mgo.v2"
@@ -15,7 +15,7 @@ func main() {
 
 	// Method:   GET
 	app.Handle("GET", "/", func(ctx iris.Context) {
-		parser.NewParser().Parse()
+		parser.NewParser().Parse(getSession())
 	})
 
 	app.Run(

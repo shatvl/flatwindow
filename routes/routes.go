@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"flatwindow/controllers"
+	"github.com/shatvl/flatwindow/controllers"
 
 	"github.com/kataras/iris"
 	mgo "gopkg.in/mgo.v2"

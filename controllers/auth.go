@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"flatwindow/models"
-	"flatwindow/repositories"
-	"flatwindow/services"
+	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/repositories"
+	"github.com/shatvl/flatwindow/services"
 
 	"github.com/kataras/iris"
 	mgo "gopkg.in/mgo.v2"

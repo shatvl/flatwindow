@@ -4,9 +4,9 @@ import (
 	"errors"
 	"time"
 
-	"flatwindow/config"
-	"flatwindow/models"
-	"flatwindow/repositories"
+	"github.com/shatvl/flatwindow/config"
+	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/repositories"
 
 	jwt "github.com/dgrijalva/jwt-go"
 )
