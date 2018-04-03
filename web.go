@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/kataras/iris"
 	mgo "gopkg.in/mgo.v2"
 )
@@ -16,8 +18,10 @@ func main() {
 		ctx.Writef("LOL HI, AHAHAHAH")
 	})
 
+	port := os.Getenv("PORT")
+
 	app.Run(
-		iris.Addr(":5000"),
+		iris.Addr(":"+port),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,
