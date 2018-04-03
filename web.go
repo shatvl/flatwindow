@@ -27,13 +27,14 @@ func main() {
 }
 
 func getSession() *mgo.Session {
-	session, err := mgo.Dial("mongodb://localhost:27017/irn")
+	// session, err := mgo.Dial("mongodb://localhost:27017/irn")
 
-	if err != nil {
-		panic(err)
-	}
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	session.SetMode(mgo.Monotonic, true)
+	// session.SetMode(mgo.Monotonic, true)
 
-	return session
+	// return session
+	return "124"
 }
