@@ -17,7 +17,7 @@ func main() {
 	})
 
 	app.Run(
-		iris.Addr(":8081"),
+		iris.Addr(":5000"),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,
