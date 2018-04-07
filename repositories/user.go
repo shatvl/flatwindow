@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"errors"
-	"fmt"
+	
 	"github.com/shatvl/flatwindow/config"
 	"github.com/shatvl/flatwindow/models"
 	"github.com/shatvl/flatwindow/mongo"
