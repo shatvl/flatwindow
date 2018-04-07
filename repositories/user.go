@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"errors"
-	"fmt"
+
 	"github.com/shatvl/flatwindow/config"
 	"github.com/shatvl/flatwindow/models"
 	"github.com/shatvl/flatwindow/mongo"
@@ -26,10 +26,9 @@ func (r *UserRepository) Create(user *models.User) (*models.UserResource, error)
 	session := mongo.Session()
 	defer session.Close()
 	
-	foundUser, err := r.FindByEmail(user.Email)
-	fmt.Println(foundUser.ID)
+	_, err := r.FindByEmail(user.Email)
 
-	if foundUser.ID != "" || string(user.Password) == "" || user.Email == "" {
+	if err != nil || string(user.Password) == "" || user.Email == "" {
 		return nil, errors.New("Unable to create this user")
 	}
 
