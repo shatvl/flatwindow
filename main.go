@@ -29,7 +29,7 @@ func main() {
 	// Declare all routes
 	routes.DeclareRoutes(app)
 	// Enable CORS
-	iris.Use(cors.Default())
+	app.Use(cors.Default())
 	
 	gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
 	gocron.Start()
