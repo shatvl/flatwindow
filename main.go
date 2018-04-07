@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"os"
-	
+
 	"github.com/kataras/iris"
 	"github.com/jasonlvhit/gocron"
 	"github.com/shatvl/flatwindow/mongo"
@@ -30,6 +30,10 @@ func main() {
 	gocron.Start()
 	
 	port := os.Getenv("PORT")
+
+	app.Get("/", func(ctx iris.Context) {
+		ctx.Text("Works fine")
+	})
 
 	app.Run(
 		iris.Addr(":" + port),
