@@ -28,7 +28,7 @@ func (r *UserRepository) Create(user *models.User) (*models.UserResource, error)
 	
 	_, err := r.FindByEmail(user.Email)
 
-	if err != nil || string(user.Password) == "" || user.Email == "" {
+	if err == nil || string(user.Password) == "" || user.Email == "" {
 		return nil, errors.New("Unable to create this user")
 	}
 
