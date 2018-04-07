@@ -27,15 +27,8 @@ func main() {
 	// Set origin mongo connection
 	mongo.SetSession(session)
 	// Declare all routes
+	
 	// Enable CORS
-	app.UseGlobal(cors.New(cors.Options{
-		AllowedMethods:     []string{"GET", "POST", "OPTIONS", "HEAD", "PUT", "PATCH"},
-		AllowedOrigins:     []string{"*"},
-		AllowedHeaders:     []string{"*"},
-		ExposedHeaders:     []string{"*"},
-		OptionsPassthrough: true,
-		MaxAge:             3600,
-	}))
 
 	routes.DeclareRoutes(app)
 	
