@@ -43,7 +43,7 @@ func (ac *AuthController) LoginHandler(ctx iris.Context) {
 		return
 	}
 
-	token, err := ac.userService.GenerateToken(&credentials)
+	token, user, err := ac.userService.GenerateToken(&credentials)
 
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
@@ -52,5 +52,5 @@ func (ac *AuthController) LoginHandler(ctx iris.Context) {
 	}
 
 	ctx.StatusCode(iris.StatusOK)
-	ctx.JSON(iris.Map{"token": token})
+	ctx.JSON(iris.Map{"token": token, "user": user})
 }

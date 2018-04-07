@@ -32,17 +32,17 @@ type jwtClaims struct {
 }
 
 // GenerateToken generates token for user
-func (s *UserService) GenerateToken(credentials *models.Credentials) (string, error) {
+func (s *UserService) GenerateToken(credentials *models.Credentials) (string, *models.User, error) {
 	foundUser, err := s.Repo.FindByEmail(credentials.Email)
 
 	if err != nil {
-		return "", errors.New(`Invalid email or password`)
+		return "", nil, errors.New(`Invalid email or password`)
 	}
 
 	valid, err := models.ValidatePassword(credentials.Password, []byte(foundUser.Password))
 
 	if err != nil || !valid {
-		return "", errors.New(`Invalid email or password`)
+		return "", nil, errors.New(`Invalid email or password`)
 	}
 
 	claims := &jwtClaims{
@@ -60,10 +60,10 @@ func (s *UserService) GenerateToken(credentials *models.Credentials) (string, er
 	t, err := token.SignedString([]byte(config.Secret))
 
 	if err != nil {
-		return "", err
+		return "", nil, err
 	}
 
-	return t, err
+	return t, foundUser, err
 }
 
 
