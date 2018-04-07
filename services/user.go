@@ -11,24 +11,18 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
+// UserService for user management
 type UserService struct {
-	repo *repositories.UserRepository
+	Repo *repositories.UserRepository
 }
 
 // NewUserService returns UserService preference
-func NewUserService(repo *repositories.UserRepository) *UserService {
+func NewUserService() *UserService {
+	repo := repositories.NewUserRepository()
+
 	return &UserService{
-		repo: repo,
+		Repo: repo,
 	}
-}
-
-// Create user method
-func (s *UserService) Create(user models.User) (models.UserResource, error) {
-	if user.ID != "" || string(user.Password) == "" || user.Email == "" {
-		return models.UserResource{}, errors.New("Unable to create this user")
-	}
-
-	return s.repo.Create(user)
 }
 
 type jwtClaims struct {
@@ -37,9 +31,9 @@ type jwtClaims struct {
 	jwt.StandardClaims
 }
 
-// Generate token for user
-func (s *UserService) GenerateToken(credentials models.Credentials) (string, error) {
-	foundUser, err := s.repo.FindByEmail(credentials.Email)
+// GenerateToken generates token for user
+func (s *UserService) GenerateToken(credentials *models.Credentials) (string, error) {
+	foundUser, err := s.Repo.FindByEmail(credentials.Email)
 
 	if err != nil {
 		return "", errors.New(`Invalid email or password`)

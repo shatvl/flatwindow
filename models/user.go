@@ -19,7 +19,7 @@ type User struct {
 
 // UserResource
 type UserResource struct {
-	Data User `json:"data"`
+	Data *User `json:"data"`
 }
 
 // GeneratePassword will generate a hashed password by users input password

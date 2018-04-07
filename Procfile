@@ -1,1 +1,1 @@
-web: flatwindow -p 8081
+web: flatwindow

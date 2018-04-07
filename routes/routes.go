@@ -1,16 +1,21 @@
 package routes
 
 import (
-	"github.com/shatvl/flatwindow/controllers"
-
 	"github.com/kataras/iris"
-	mgo "gopkg.in/mgo.v2"
+	"github.com/shatvl/flatwindow/controllers"
+	"github.com/iris-contrib/middleware/cors"
 )
 
 //DeclareRoutes for the app
-func DeclareRoutes(app *iris.Application, session *mgo.Session) {
-	app.PartyFunc("/auth", func(auth iris.Party) {
-		auth.Post("/register", controllers.NewAuthController(session).RegisterHandler)
-		auth.Post("/login", controllers.NewAuthController(session).LoginHandler)
+func DeclareRoutes(app *iris.Application) {
+	//CORS middleware
+	cors := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowCredentials: true,
 	})
+	auth := app.Party("/auth", cors).AllowMethods(iris.MethodOptions) 
+	{
+		auth.Post("/register", controllers.NewAuthController().RegisterHandler)
+		auth.Post("/login", controllers.NewAuthController().LoginHandler)
+	}
 }
