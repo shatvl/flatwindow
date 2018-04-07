@@ -27,10 +27,11 @@ func main() {
 
 	gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
 	gocron.Start()
-	//port := os.Getenv("PORT")
+	
+	port := os.Getenv("PORT")
 
 	app.Run(
-		iris.Addr(":"+"5000"),
+		iris.Addr(":" + port),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,
