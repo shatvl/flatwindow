@@ -27,7 +27,6 @@ func main() {
 	// Set origin mongo connection
 	mongo.SetSession(session)
 	// Declare all routes
-	routes.DeclareRoutes(app)
 	// Enable CORS
 	app.Use(cors.New(cors.Options{
 		AllowedMethods:     []string{"GET", "POST", "OPTIONS", "HEAD", "PUT", "PATCH"},
@@ -37,6 +36,8 @@ func main() {
 		OptionsPassthrough: true,
 		MaxAge:             3600,
 	}))
+
+	routes.DeclareRoutes(app)
 	
 	gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
 	gocron.Start()
