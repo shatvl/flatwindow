@@ -9,7 +9,6 @@ import (
 	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/routes"
 	"github.com/shatvl/flatwindow/parsers"
-	"github.com/iris-contrib/middleware/cors"
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -27,10 +26,9 @@ func main() {
 	// Set origin mongo connection
 	mongo.SetSession(session)
 	// Declare all routes
-	
-	// Enable CORS
-
 	routes.DeclareRoutes(app)
+
+	// Enable CORS
 	
 	gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
 	gocron.Start()
