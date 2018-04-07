@@ -27,9 +27,9 @@ func (r *UserRepository) Create(user *models.User) (*models.UserResource, error)
 	defer session.Close()
 	
 	_, err := r.FindByEmail(user.Email)
-	fmt.Println("Email: " + user.Email + ", Password: " + user.Password)
+
 	if err == nil || string(user.Password) == "" || user.Email == "" {
-		return nil, errors.New("Unable to create this user")
+		return nil, errors.New("User already exists")
 	}
 
 	passsword, err := models.GeneratePassword(user.Password)
