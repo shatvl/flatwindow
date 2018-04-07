@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"errors"
-
+	"fmt"
 	"github.com/shatvl/flatwindow/config"
 	"github.com/shatvl/flatwindow/models"
 	"github.com/shatvl/flatwindow/mongo"
@@ -27,7 +27,7 @@ func (r *UserRepository) Create(user *models.User) (*models.UserResource, error)
 	defer session.Close()
 	
 	_, err := r.FindByEmail(user.Email)
-
+	fmt.Println("Email: " + user.Email + ", Password: " + user.Password)
 	if err == nil || string(user.Password) == "" || user.Email == "" {
 		return nil, errors.New("Unable to create this user")
 	}
