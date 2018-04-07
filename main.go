@@ -29,7 +29,14 @@ func main() {
 	// Declare all routes
 	routes.DeclareRoutes(app)
 	// Enable CORS
-	app.Use(cors.Default())
+	app.Use(cors.New(cors.Options{
+		AllowedMethods:     []string{"GET", "POST", "OPTIONS", "HEAD", "PUT", "PATCH"},
+		AllowedOrigins:     []string{"*"},
+		AllowedHeaders:     []string{"*"},
+		ExposedHeaders:     []string{"*"},
+		OptionsPassthrough: true,
+		MaxAge:             3600,
+	}))
 	
 	gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
 	gocron.Start()
