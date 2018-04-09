@@ -35,7 +35,7 @@ func (ts *TSParser) Parse() {
 	}
 
 	for i := 0; i < len(uedb.Records.Records); i++ {
-		ts.AdService.CreateTsAd(&uedb.Records.Records[i])
+		ts.AdService.CreateAd(&uedb.Records.Records[i])
 	}
 }
 

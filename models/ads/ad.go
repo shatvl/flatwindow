@@ -5,27 +5,27 @@ import (
 )
 
 type Uedb struct {
-	XMLName xml.Name `xml:"uedb"`
+	XMLName xml.Name `xml:"uedb" json:"-"`
 	Records Records  `xml:"records"`
 }
 
 type Records struct {
-	XMLName xml.Name `xml:"records"`
-	Records []TsAd `xml:"record"`
+	XMLName xml.Name `xml:"records" json:"-"`
+	Records []Ad `xml:"record"`
 }
 
 type Photos struct {
-	XMLName xml.Name `xml:"photos" bson:"-"`
+	XMLName xml.Name `xml:"photos" bson:"-" json:"-"`
 	Photos  []Photo  `xml:"photo"`
 }
 
 type Photo struct {
-	XMLName xml.Name `xml:"photo" bson:"-"`
+	XMLName xml.Name `xml:"photo" bson:"-" json:"-"`
 	Picture string   `xml:"picture,attr"`
 }
 
-type TsAd struct {
-	XMLName          xml.Name `xml:"record" bson:"-"`
+type Ad struct {
+	XMLName          xml.Name `xml:"record" bson:"-" json:"-"`
 	Unid             string   `xml:"unid,attr"`
 	Subject          string   `xml:"subject"`
 	RemunerationType byte     `xml:"remuneration_type" json:"remunerationType" bson:"remunerationType"`

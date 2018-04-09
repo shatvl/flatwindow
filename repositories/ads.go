@@ -23,7 +23,7 @@ func NewAdRepository() *AdRepository {
 }
 
 // Create user by json body
-func (r *AdRepository) CreateTsAd(ad *models.TsAd) (error) {
+func (r *AdRepository) CreateAd(ad *models.Ad) (error) {
 	session := mongo.Session()
 	defer session.Close()
 
@@ -35,13 +35,13 @@ func (r *AdRepository) CreateTsAd(ad *models.TsAd) (error) {
 }
 
 // FindByTypeAndUID find ad by Type and Unique id
-func (r *AdRepository) FindByTypeAndUID(t byte, uid string) (*models.TsAd, error) {
+func (r *AdRepository) FindByTypeAndUID(t byte, uid string) (*models.Ad, error) {
 	session := mongo.Session()
 	defer session.Close()
 
 	switch t {
 		case TsType:
-			ad := models.TsAd{}
+			ad := models.Ad{}
 			err := session.DB(config.Db).C(r.collName).Find(bson.M{"agentType": TsType, "unid": uid}).One(&ad)
 			
 			if err != nil {
@@ -52,4 +52,43 @@ func (r *AdRepository) FindByTypeAndUID(t byte, uid string) (*models.TsAd, error
 	}
 
 	return nil, nil
+}
+
+func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, string, error) {
+	session := mongo.Session()
+	defer session.Close()
+
+	//q := minquery.New(session.DB(config.Db), r.collName, bson.M{"rooms": rooms}).Sort("_id").Limit(5)
+	//cursor = "IQAAABByb29tcwACAAAAB19pZABayLw_WNU2_bMBChQA"
+	var ads []*models.Ad
+
+	query := getFilterQuery(&filter.Filter)
+
+	session.DB(config.Db).C(r.collName).Find(&query).All(&ads)
+
+	return ads, "", nil
+}
+
+func getFilterQuery(filter *models.AdFilter) (*bson.M){
+	query := bson.M{}
+
+	if filter.Rooms != 0 {
+		query["rooms"] = bson.M{
+			"$gt": filter.Rooms,
+		}	
+	}
+
+	if filter.MinPrice != 0 {
+		query["price"] = bson.M{
+			"$gt": filter.MinPrice,
+		}
+	}
+
+	if filter.MaxPrice != 0 {
+		query["price"] = bson.M{
+			"$lt": filter.MaxPrice,
+		}
+	}
+
+	return &query
 }

@@ -22,8 +22,8 @@ func NewAdService() *AdService {
 	}
 }
 
-// CreateTSAd creates or updates ad for t-s ads
-func (s *AdService) CreateTsAd(ad *models.TsAd) (error) {
+// CreateAd creates or updates ad for t-s ads
+func (s *AdService) CreateAd(ad *models.Ad) (error) {
 	session := mongo.Session()
 	defer session.Close()
 	
@@ -34,7 +34,7 @@ func (s *AdService) CreateTsAd(ad *models.TsAd) (error) {
 		return nil
 	}		
 
-	err = s.Repo.CreateTsAd(ad)
+	err = s.Repo.CreateAd(ad)
 
 	if err != nil {
 		fmt.Println(err)
@@ -45,3 +45,7 @@ func (s *AdService) CreateTsAd(ad *models.TsAd) (error) {
 
 	return nil
 }
+
+func (s *AdService) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, string, error){
+	return s.Repo.GetAdsWithFilter(filter)
+} 

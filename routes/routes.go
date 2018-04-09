@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"github.com/kataras/iris"
 	"github.com/shatvl/flatwindow/controllers"
 	"github.com/iris-contrib/middleware/cors"
@@ -8,7 +9,7 @@ import (
 
 //DeclareRoutes for the app
 func DeclareRoutes(app *iris.Application) {
-	//CORS middleware
+	//Enable CORS middleware
 	crs := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
 		AllowCredentials: true,
@@ -19,4 +20,11 @@ func DeclareRoutes(app *iris.Application) {
 		auth.Post("/register", controllers.NewAuthController().RegisterHandler)
 		auth.Post("/login", controllers.NewAuthController().LoginHandler)
 	}
+
+	api := app.Party("/api", crs).AllowMethods(iris.MethodOptions)
+	{
+		api.Post("/poducts", controllers.NewAdController().GetProductsHandler)
+	}
+
+	fmt.Println(app.GetRoutes())
 }

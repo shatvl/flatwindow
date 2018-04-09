@@ -60,6 +60,10 @@
 			"Rev": "23480c0665776210b5fbbac6eaaee40e3e6a96b7"
 		},
 		{
+			"ImportPath": "github.com/icza/minquery",
+			"Rev": "41636845238cdf184ab2bbcacb3146f2f2c2e45c"
+		},
+		{
 			"ImportPath": "github.com/iris-contrib/formBinder",
 			"Rev": "ad9fb86c356f971f30319c40ddbdcf72129a2791"
 		},

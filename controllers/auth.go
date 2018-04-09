@@ -1,22 +1,20 @@
 package controllers
 
-import (
-	"github.com/shatvl/flatwindow/models"
-	"github.com/shatvl/flatwindow/services"
+	import (
+		"github.com/shatvl/flatwindow/models"
+		"github.com/shatvl/flatwindow/services"
 
-	"github.com/kataras/iris"
-)
+		"github.com/kataras/iris"
+	)
 
 // AuthController provides login, register api
 type AuthController struct {
-	userService *services.UserService
+	UserService *services.UserService
 }
 
 // NewAuthController provides a reference to a AuthController
 func NewAuthController() *AuthController {
-	userService := services.NewUserService()
-
-	return &AuthController{userService}
+	return &AuthController{UserService: services.NewUserService()}
 }
 
 // RegisterHandler creates a new user
@@ -24,7 +22,7 @@ func (ac *AuthController) RegisterHandler(ctx iris.Context) {
 	//create user from json body
 	user := models.User{}
 	ctx.ReadJSON(&user)
-	res, err := ac.userService.Repo.Create(&user)
+	res, err := ac.UserService.Repo.Create(&user)
 
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
@@ -43,7 +41,7 @@ func (ac *AuthController) LoginHandler(ctx iris.Context) {
 		return
 	}
 
-	token, user, err := ac.userService.GenerateToken(&credentials)
+	token, user, err := ac.UserService.GenerateToken(&credentials)
 
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)

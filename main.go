@@ -2,14 +2,14 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"github.com/kataras/iris"
-	"github.com/jasonlvhit/gocron"
+	"github.com/shatvl/flatwindow/config"
+	//"github.com/jasonlvhit/gocron"
 	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/routes"
-	"github.com/shatvl/flatwindow/parsers"
-	mgo "gopkg.in/mgo.v2"
+	//"github.com/shatvl/flatwindow/parsers"
+	"gopkg.in/mgo.v2"
 )
 
 func main() {
@@ -25,15 +25,20 @@ func main() {
 
 	// Set origin mongo connection
 	mongo.SetSession(session)
+	session.DB(config.Db).C("ads").EnsureIndex(mgo.Index{
+		Key: []string{"rooms", "_id"},
+		Unique: true,
+		DropDups: true,
+		Background: true,
+		Sparse: true,
+	})
 	// Declare all routes
 	routes.DeclareRoutes(app)
-
-	// Enable CORS
 	
-	gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
-	gocron.Start()
+	//gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
+	//gocron.Start()
 	
-	port := os.Getenv("PORT")
+	port := "5000" //os.Getenv("PORT")
 
 	app.Get("/", func(ctx iris.Context) {
 		ctx.Text("Works fine")
