@@ -24,6 +24,7 @@ func DeclareRoutes(app *iris.Application) {
 	api := app.Party("/api", crs).AllowMethods(iris.MethodOptions)
 	{
 		api.Post("/poducts", controllers.NewAdController().GetProductsHandler)
+		api.Get("/product/{_id:string}", controllers.NewAdController().GetProductHandler)
 	}
 
 	fmt.Println(app.GetRoutes())

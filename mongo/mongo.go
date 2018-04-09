@@ -25,3 +25,4 @@ func SetSession(s *mgo.Session) {
 func Session() *mgo.Session {
 	return originSession.session.Copy()
 }
+

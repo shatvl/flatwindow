@@ -11,4 +11,5 @@ type AdFilter struct {
 
 type AdFilterRequest struct {
 	Filter AdFilter `json:"filter"`
+	Page   byte		`json:"page"`
 }

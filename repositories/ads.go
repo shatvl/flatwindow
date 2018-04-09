@@ -1,6 +1,8 @@
 package repositories
 
 import (
+	"errors"
+
 	"github.com/shatvl/flatwindow/config"
 	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/models/ads"
@@ -9,6 +11,7 @@ import (
 
 const (
 	TsType = 101
+	AdsPerPage = 9
 )
 
 // AdRepository with "ads" collection
@@ -54,43 +57,50 @@ func (r *AdRepository) FindByTypeAndUID(t byte, uid string) (*models.Ad, error) 
 	return nil, nil
 }
 
-func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, string, error) {
+func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, error) {
 	session := mongo.Session()
 	defer session.Close()
 
 	//q := minquery.New(session.DB(config.Db), r.collName, bson.M{"rooms": rooms}).Sort("_id").Limit(5)
-	//cursor = "IQAAABByb29tcwACAAAAB19pZABayLw_WNU2_bMBChQA"
 	var ads []*models.Ad
 
 	query := getFilterQuery(&filter.Filter)
 
-	session.DB(config.Db).C(r.collName).Find(&query).All(&ads)
+	session.DB(config.Db).C(r.collName).Find(&query).Limit(AdsPerPage).Skip(int(filter.Page * AdsPerPage)).All(&ads)
 
-	return ads, "", nil
+	return ads, nil
+}
+
+func (r *AdRepository) GetAdById(_id string) (*models.Ad, error) {
+	if !bson.IsObjectIdHex(_id) {
+		return nil, errors.New(`Invalid _id`)
+	}
+	
+	session := mongo.Session()
+	defer session.Close()
+
+	var ad models.Ad
+
+	err := session.DB(config.Db).C(r.collName).FindId(bson.ObjectIdHex(_id)).One(&ad)
+
+	return &ad, err
 }
 
 func getFilterQuery(filter *models.AdFilter) (*bson.M){
 	query := bson.M{}
 
 	if filter.Rooms != 0 {
-		query["rooms"] = bson.M{
-			"$gt": filter.Rooms,
-		}	
+		query["rooms"] = bson.M{"$gt": filter.Rooms}	
 	}
-
 	if filter.MinPrice != 0 && filter.MaxPrice != 0 {
-		query["price"] = bson.M{
-			"$gte": filter.MinPrice,
-			"$lte": filter.MaxPrice,
-		}
+		query["price"] = bson.M{"$gte": filter.MinPrice, "$lte": filter.MaxPrice}
 	} else if filter.MinPrice != 0 {
-		query["price"] = bson.M{
-			"$gte": filter.MinPrice,
-		}
+		query["price"] = bson.M{"$gte": filter.MinPrice}
 	} else if filter.MaxPrice != 0 {
-		query["price"] = bson.M{
-			"$lte": filter.MaxPrice,
-		}
+		query["price"] = bson.M{"$lte": filter.MaxPrice}
+	}
+	if filter.Text != "" {
+		query["$text"] = bson.M{"$search": filter.Text}
 	}
 
 	return &query

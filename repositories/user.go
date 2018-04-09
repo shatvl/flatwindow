@@ -22,7 +22,7 @@ func NewUserRepository() *UserRepository {
 }
 
 // Create user by json body
-func (r *UserRepository) Create(user *models.User) (*models.UserResource, error) {
+func (r *UserRepository) Create(user *models.User) (*models.User, error) {
 	session := mongo.Session()
 	defer session.Close()
 	
@@ -49,9 +49,7 @@ func (r *UserRepository) Create(user *models.User) (*models.UserResource, error)
 		return nil, err
 	}
 
-	result := &models.UserResource{Data: user}
-
-	return result, nil
+	return user, nil
 }
 
 // FindByEmail finds user by email

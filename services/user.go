@@ -67,6 +67,6 @@ func (s *UserService) GenerateToken(credentials *models.Credentials) (string, *m
 }
 
 
-func (s *UserService) CreateUser(u *models.User) (*models.UserResource, error) {
+func (s *UserService) CreateUser(u *models.User) (*models.User, error) {
 	return s.Repo.Create(u)
 }

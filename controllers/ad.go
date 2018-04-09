@@ -23,14 +23,30 @@ func (ac *AdController) GetProductsHandler(ctx iris.Context) {
 	if err := ctx.ReadJSON(request); err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
 		ctx.JSON(iris.Map{"error": err.Error()})
+		return
 	}
 	
-	ads, _, err := ac.AdService.GetAdsWithFilter(request)
+	ads, err := ac.AdService.Repo.GetAdsWithFilter(request)
 
 	if err != nil {
-		ctx.JSON(err)
+		ctx.StatusCode(iris.StatusBadRequest)
+		ctx.JSON(iris.Map{"error": err.Error()})
+		return
 	}
 
-
 	ctx.JSON(ads)
+}
+
+func (ac *AdController) GetProductHandler(ctx iris.Context) {
+	id := ctx.Params().Get("_id")
+
+	ad, err := ac.AdService.Repo.GetAdById(id)
+
+	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		ctx.JSON(iris.Map{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(ad)
 }

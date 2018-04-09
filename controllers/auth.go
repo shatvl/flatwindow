@@ -22,14 +22,15 @@ func (ac *AuthController) RegisterHandler(ctx iris.Context) {
 	//create user from json body
 	user := models.User{}
 	ctx.ReadJSON(&user)
-	res, err := ac.UserService.Repo.Create(&user)
+	u, err := ac.UserService.Repo.Create(&user)
 
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
 		ctx.JSON(iris.Map{"error": err.Error()})
+		return
 	}
 
-	ctx.JSON(res)
+	ctx.JSON(iris.Map{"data": u.ToUserJSON()})
 }
 
 // LoginHandler returns JWT
@@ -50,5 +51,5 @@ func (ac *AuthController) LoginHandler(ctx iris.Context) {
 	}
 
 	ctx.StatusCode(iris.StatusOK)
-	ctx.JSON(iris.Map{"token": token, "user": user})
+	ctx.JSON(iris.Map{"data": iris.Map{"token": token, "user": user.ToUserJSON()}})
 }

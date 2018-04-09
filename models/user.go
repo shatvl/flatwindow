@@ -17,9 +17,12 @@ type User struct {
 	Active    bool          `json:"active"`
 }
 
-// UserResource
-type UserResource struct {
-	Data *User `json:"data"`
+type UserJSON struct {
+	ID 		   bson.ObjectId `json:"id"`
+	Email 	   string 	     `json:"email"`
+	CreatedAt  time.Time     `json:"created_at"`
+	Role	   string 		 `json:"role"`
+	Active	   bool			 `json:"active"`
 }
 
 // GeneratePassword will generate a hashed password by users input password
@@ -33,4 +36,11 @@ func ValidatePassword(password string, hashed []byte) (bool, error) {
 	}
 
 	return true, nil
+}
+
+
+func (u *User) ToUserJSON() (*UserJSON) {
+	return &UserJSON{
+		u.ID, u.Email, u.CreatedAt, u.Role, u.Active,
+	}
 }

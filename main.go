@@ -32,6 +32,9 @@ func main() {
 		Background: true,
 		Sparse: true,
 	})
+	if err := session.DB(config.Db).C("ads").EnsureIndex(mgo.Index{Key: []string{"$text:body"}}); err != nil {
+		panic(err)
+	}
 	// Declare all routes
 	routes.DeclareRoutes(app)
 	

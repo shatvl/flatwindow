@@ -45,7 +45,3 @@ func (s *AdService) CreateAd(ad *models.Ad) (error) {
 
 	return nil
 }
-
-func (s *AdService) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, string, error){
-	return s.Repo.GetAdsWithFilter(filter)
-} 
