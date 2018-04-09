@@ -41,7 +41,7 @@ func main() {
 	//gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
 	//gocron.Start()
 	
-	port := "5000" //os.Getenv("PORT")
+	port := os.Getenv("PORT")
 
 	app.Get("/", func(ctx iris.Context) {
 		ctx.Text("Works fine")
