@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/kataras/iris"
 	"github.com/shatvl/flatwindow/config"
