@@ -78,15 +78,18 @@ func getFilterQuery(filter *models.AdFilter) (*bson.M){
 		}	
 	}
 
-	if filter.MinPrice != 0 {
+	if filter.MinPrice != 0 && filter.MaxPrice != 0 {
 		query["price"] = bson.M{
-			"$gt": filter.MinPrice,
+			"$gte": filter.MinPrice,
+			"$lte": filter.MaxPrice,
 		}
-	}
-
-	if filter.MaxPrice != 0 {
+	} else if filter.MinPrice != 0 {
 		query["price"] = bson.M{
-			"$lt": filter.MaxPrice,
+			"$gte": filter.MinPrice,
+		}
+	} else if filter.MaxPrice != 0 {
+		query["price"] = bson.M{
+			"$lte": filter.MaxPrice,
 		}
 	}
 
