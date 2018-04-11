@@ -48,5 +48,5 @@ func (ac *AdController) GetProductHandler(ctx iris.Context) {
 		return
 	}
 
-	ctx.JSON(ad)
+	ctx.JSON(iris.Map{"data": ad})
 }
