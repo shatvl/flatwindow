@@ -6,10 +6,10 @@ import (
 
 	"github.com/kataras/iris"
 	"github.com/shatvl/flatwindow/config"
-	//"github.com/jasonlvhit/gocron"
+	"github.com/jasonlvhit/gocron"
 	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/routes"
-	//"github.com/shatvl/flatwindow/parsers"
+	"github.com/shatvl/flatwindow/parsers"
 	"gopkg.in/mgo.v2"
 )
 
@@ -39,8 +39,8 @@ func main() {
 	// Declare all routes
 	routes.DeclareRoutes(app)
 	
-	//gocron.Every(15).Seconds().Do(parsers.NewTSParser().Parse)
-	//gocron.Start()
+	gocron.Every(1).Day().At("19:00").Do(parsers.NewTSParser().Parse)
+	gocron.Start()
 	
 	port := os.Getenv("PORT")
 
