@@ -6,17 +6,17 @@ import (
 
 type Uedb struct {
 	XMLName xml.Name `xml:"uedb" json:"-"`
-	Records Records  `xml:"records"`
+	Records Records  `xml:"records" json:"records"`
 }
 
 type Records struct {
 	XMLName xml.Name `xml:"records" json:"-"`
-	Records []Ad `xml:"record"`
+	Records []Ad `xml:"record" json:"records"`
 }
 
 type Photos struct {
 	XMLName xml.Name `xml:"photos" bson:"-" json:"-"`
-	Photos  []Photo  `xml:"photo"`
+	Photos  []Photo  `xml:"photo" json:"photos"`
 }
 
 type Photo struct {
