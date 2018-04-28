@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/shatvl/flatwindow/mongo"
-	"github.com/shatvl/flatwindow/models/ads"
+	"github.com/shatvl/flatwindow/models"
 	"github.com/shatvl/flatwindow/repositories"
 )
 
@@ -13,7 +13,7 @@ type AdService struct {
 	Repo *repositories.AdRepository
 }
 
-// NewUserService returns UserService preference
+// NewBidService returns UserService preference
 func NewAdService() *AdService {
 	repo := repositories.NewAdRepository()
 

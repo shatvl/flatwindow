@@ -5,6 +5,10 @@ import (
 	"github.com/kataras/iris"
 	"github.com/shatvl/flatwindow/controllers"
 	"github.com/iris-contrib/middleware/cors"
+	jwtmiddleware "github.com/iris-contrib/middleware/jwt"
+	"github.com/shatvl/flatwindow/config"
+	"github.com/dgrijalva/jwt-go"
+	"github.com/kataras/iris/context"
 )
 
 //DeclareRoutes for the app
@@ -13,6 +17,18 @@ func DeclareRoutes(app *iris.Application) {
 	crs := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
 		AllowCredentials: true,
+	})
+
+	//Enable jwt middleware
+	jwt := jwtmiddleware.New(jwtmiddleware.Config{
+		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
+			return []byte(config.Secret), nil
+		},
+		ErrorHandler: func(ctx context.Context, s string) {
+			ctx.StatusCode(iris.StatusUnauthorized)
+			ctx.JSON(iris.Map{"error": "Unauthorized"})
+		},
+		SigningMethod: jwt.SigningMethodHS256,
 	})
 
 	auth := app.Party("/auth", crs).AllowMethods(iris.MethodOptions)
@@ -25,6 +41,9 @@ func DeclareRoutes(app *iris.Application) {
 	{			
 		api.Post("/products", controllers.NewAdController().GetProductsHandler)
 		api.Get("/product/{_id:string}", controllers.NewAdController().GetProductHandler)
+		api.Post("/bid", controllers.NewBidController().BidAdHandler)
+		api.Get("/bids", controllers.NewBidController().GetBidsHandler)
+		api.Post("/me", jwt.Serve, controllers.NewAuthController().MeHandler)
 	}
 
 	fmt.Println(app.GetRoutes())

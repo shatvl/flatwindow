@@ -5,7 +5,7 @@ import (
 
 	"github.com/shatvl/flatwindow/config"
 	"github.com/shatvl/flatwindow/mongo"
-	"github.com/shatvl/flatwindow/models/ads"
+	"github.com/shatvl/flatwindow/models"
 	"gopkg.in/mgo.v2/bson"
 )
 

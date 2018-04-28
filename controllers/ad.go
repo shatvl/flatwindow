@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/shatvl/flatwindow/services"
-	"github.com/shatvl/flatwindow/models/ads"
+	"github.com/shatvl/flatwindow/models"
 
 	"github.com/kataras/iris"
 )

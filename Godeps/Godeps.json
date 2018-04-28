@@ -38,6 +38,11 @@
 			"Rev": "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e"
 		},
 		{
+			"ImportPath": "github.com/dgrijalva/jwt-go/request",
+			"Comment": "v3.2.0",
+			"Rev": "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e"
+		},
+		{
 			"ImportPath": "github.com/eknkc/amber",
 			"Rev": "cdade1c073850f4ffc70a829e31235ea6892853b"
 		},
@@ -60,15 +65,16 @@
 			"Rev": "23480c0665776210b5fbbac6eaaee40e3e6a96b7"
 		},
 		{
-			"ImportPath": "github.com/icza/minquery",
-			"Rev": "41636845238cdf184ab2bbcacb3146f2f2c2e45c"
-		},
-		{
 			"ImportPath": "github.com/iris-contrib/formBinder",
 			"Rev": "ad9fb86c356f971f30319c40ddbdcf72129a2791"
 		},
 		{
 			"ImportPath": "github.com/iris-contrib/middleware/cors",
+			"Comment": "v10-13-g048e2be",
+			"Rev": "048e2be034ed172c6754448b8a54a9c55debad46"
+		},
+		{
+			"ImportPath": "github.com/iris-contrib/middleware/jwt",
 			"Comment": "v10-13-g048e2be",
 			"Rev": "048e2be034ed172c6754448b8a54a9c55debad46"
 		},
@@ -84,6 +90,10 @@
 		{
 			"ImportPath": "github.com/juju/errors",
 			"Rev": "c7d06af17c68cd34c835053720b21f6549d9b0ee"
+		},
+		{
+			"ImportPath": "github.com/kataras/go-mailer",
+			"Rev": "06940f78e32a5b39cdd70e7ce6667d9361a8282b"
 		},
 		{
 			"ImportPath": "github.com/kataras/golog",
@@ -258,6 +268,11 @@
 			"Rev": "30e450625213468c7ec31fec6102dab6504adcc9"
 		},
 		{
+			"ImportPath": "github.com/klauspost/crc32",
+			"Comment": "v1.1-5-gbab58d7",
+			"Rev": "bab58d77464aa9cf4e84200c3276da0831fe0c03"
+		},
+		{
 			"ImportPath": "github.com/mattn/go-colorable",
 			"Comment": "v0.0.9-14-gefa5899",
 			"Rev": "efa589957cd060542a26d2dd7832fd6a6c6c3ade"
@@ -298,6 +313,10 @@
 		{
 			"ImportPath": "github.com/shurcooL/sanitized_anchor_name",
 			"Rev": "86672fcb3f950f35f2e675df2240550f2a50762f"
+		},
+		{
+			"ImportPath": "github.com/valyala/bytebufferpool",
+			"Rev": "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/acme",
