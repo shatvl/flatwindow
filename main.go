@@ -2,8 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
-
 	"github.com/kataras/iris"
 	"github.com/jasonlvhit/gocron"
 	"github.com/shatvl/flatwindow/mongo"
@@ -35,9 +33,9 @@ func main() {
 		ctx.Text("Works fine")
 	})
 
-	port := os.Getenv("PORT")
+	//port := os.Getenv("PORT")
 	app.Run(
-		iris.Addr(":" + port),
+		iris.Addr(":" + "5000"),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,

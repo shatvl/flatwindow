@@ -4,6 +4,7 @@ import (
 	"github.com/shatvl/flatwindow/config"
 	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/models"
+	"gopkg.in/mgo.v2/bson"
 )
 
 // BidRepository with "bids" collection
@@ -26,13 +27,27 @@ func (r *BidRepository) CreateBid(bid *models.Bid) (error){
 	return err
 }
 
-func (r *BidRepository) GetPaginatedBids(paginate *models.PaginateFiler) ([]*models.Bid, int, error) {
+func (r *BidRepository) GetPaginatedBids(filter *models.AdFilterRequest) ([]*models.Bid, int, error) {
 	session := mongo.Session()
 	defer session.Close()
 
 	var bids []*models.Bid
 
-	err := session.DB(config.Db).C(r.collName).Find(nil).Limit(paginate.PerPage).Skip(paginate.Page * paginate.PerPage).All(&bids)
+	err := session.DB(config.Db).C(r.collName).Pipe([]bson.M{
+		                                         bson.M {
+												 	"$skip": filter.Paginate.Page * filter.Paginate.PerPage},
+												 bson.M {
+												 	"$limit": filter.Paginate.PerPage },
+												 bson.M {
+												 	"$lookup": bson.M {
+														"from": "ads",
+														"foreignField": "_id",
+														"localField": "ad_id",
+														"as": "ads",}},
+												 bson.M { "$unwind": "$ads" },
+											   }).
+		                                       All(&bids)
+
 	count, _ := session.DB(config.Db).C(r.collName).Count()
 
 	return bids, count, err

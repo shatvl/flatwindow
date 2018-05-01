@@ -10,7 +10,7 @@ const (
 )
 
 type Bid struct {
-	AdId        bson.ObjectId `json:"ad_id" bson:"ad_id,omitempty"`
+	AdId        bson.ObjectId `json:"-" bson:"ad_id,omitempty"`
 	Type        byte          `json:"type" bson:"type"`
 	Fullname    string        `json:"fullname" bson:"fullname"`
 	Email       string        `json:"email" bson:"email"`
@@ -20,5 +20,6 @@ type Bid struct {
 	AboutMeType byte          `json:"about_me_type" bson:"about_me_type"`
 	Campaign    bool          `json:"campaign" bson:"-"`
 	CopyEmail   bool          `json:"copy_email" bson:"-"`
-	PriceChange bool          `json:"price_change" bson:"price_change"`
+	PriceChange bool          `json:"pWWrice_change" bson:"price_change"`
+	Ads         Ad			  `json:"ad" bson:"ads"`
 }
