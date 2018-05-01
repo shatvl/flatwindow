@@ -61,7 +61,7 @@ func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*mode
 	defer session.Close()
 
 	//q := minquery.New(session.DB(config.Db), r.collName, bson.M{"rooms": rooms}).Sort("_id").Limit(5)
-	var ads []*models.Ad
+	ads := make([]*models.Ad,0)
 
 	query := getFilterQuery(&filter.Filter)
 

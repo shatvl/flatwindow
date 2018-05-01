@@ -31,7 +31,7 @@ func (r *BidRepository) GetPaginatedBids(filter *models.AdFilterRequest) ([]*mod
 	session := mongo.Session()
 	defer session.Close()
 
-	var bids []*models.Bid
+	bids := make([]*models.Bid, 0)
 
 	err := session.DB(config.Db).C(r.collName).Pipe([]bson.M{
 		                                         bson.M {
