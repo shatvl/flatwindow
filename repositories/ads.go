@@ -13,6 +13,14 @@ const (
 	TsType = 101
 )
 
+var feedTypeToName = map[int]string{
+	101: "ts",
+	102: "kn",
+	103: "rt",
+	104: "on",
+	105: "kf",
+}
+
 // AdRepository with "ads" collection
 type AdRepository struct {
 	collName string
@@ -84,6 +92,20 @@ func (r *AdRepository) GetAdById(_id string) (*models.Ad, error) {
 	err := session.DB(config.Db).C(r.collName).FindId(bson.ObjectIdHex(_id)).One(&ad)
 
 	return &ad, err
+}
+
+// AddAdToFeed method add ad to feed for the any playform type (onliner, kufer and etc.)
+func (r *AdRepository) AddAdToFeed(_id bson.ObjectId, feedType int, value bool) error {
+	if feedTypeToName[feedType] == "" {
+		return errors.New("unexpected feed type")
+	}
+
+	session := mongo.Session()
+	defer session.Close()
+
+	err := session.DB(config.Db).C(r.collName).Update(bson.M{"_id": _id}, bson.M{"$set": bson.M{"rss." + feedTypeToName[feedType]: value}})
+
+	return err
 }
 
 func getFilterQuery(filter *models.AdFilter) (*bson.M){

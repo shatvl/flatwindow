@@ -6,6 +6,8 @@ import (
 	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/models"
 	"github.com/shatvl/flatwindow/repositories"
+	"gopkg.in/mgo.v2/bson"
+	"errors"
 )
 
 // AdService for ad management
@@ -44,4 +46,13 @@ func (s *AdService) CreateAd(ad *models.Ad) (error) {
 	fmt.Println("Ad has been added successfully: " + ad.Unid)
 
 	return nil
+}
+
+// Add ad to feed for any platform
+func (s *AdService) AddAdToFeed(_id string, feedType int, value bool) error{
+	if !bson.IsObjectIdHex(_id) {
+		return errors.New(`Invalid _id`)
+	}
+
+	return s.Repo.AddAdToFeed(bson.ObjectIdHex(_id), feedType, value)
 }
