@@ -26,13 +26,14 @@ func (r *BidRepository) CreateBid(bid *models.Bid) (error){
 	return err
 }
 
-func (r *BidRepository) GetPaginatedBids(paginate *models.PaginateFiler) ([]*models.Bid, error) {
+func (r *BidRepository) GetPaginatedBids(paginate *models.PaginateFiler) ([]*models.Bid, int, error) {
 	session := mongo.Session()
 	defer session.Close()
 
 	var bids []*models.Bid
 
 	err := session.DB(config.Db).C(r.collName).Find(nil).Limit(paginate.PerPage).Skip(paginate.Page * paginate.PerPage).All(bids)
+	count, _ := session.DB(config.Db).C(r.collName).Count()
 
-	return bids, err
+	return bids, count, err
 }

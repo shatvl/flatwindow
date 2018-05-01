@@ -24,6 +24,6 @@ func (bs *BidService) CreateBid(bid *models.Bid) (error) {
 	return bs.Repo.CreateBid(bid)
 }
 
-func (bs *BidService) GetPaginatedBids(paginate *models.PaginateFiler) ([]*models.Bid, error) {
+func (bs *BidService) GetPaginatedBids(paginate *models.PaginateFiler) ([]*models.Bid, int, error) {
 	return bs.Repo.GetPaginatedBids(paginate)
 }

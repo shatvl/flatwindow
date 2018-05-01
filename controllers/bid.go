@@ -46,5 +46,21 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 }
 
 func (bc *BidController) GetBidsHandler(ctx iris.Context) {
-	ctx.JSON("GetBidsAction");
+	request := &models.AdFilterRequest{}
+
+	if err := ctx.ReadJSON(request); err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		ctx.JSON(iris.Map{"error": err.Error()})
+		return
+	}
+
+	bids, count, err := bc.BidService.GetPaginatedBids(request)
+
+	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		ctx.JSON(iris.Map{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(iris.Map{"data": iris.Map{"bids": bids, "count": count}})
 }
