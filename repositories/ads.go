@@ -56,7 +56,7 @@ func (r *AdRepository) FindByTypeAndUID(t byte, uid string) (*models.Ad, error) 
 	return nil, nil
 }
 
-func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, error) {
+func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, int32, error) {
 	session := mongo.Session()
 	defer session.Close()
 
@@ -66,8 +66,9 @@ func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*mode
 	query := getFilterQuery(&filter.Filter)
 
 	session.DB(config.Db).C(r.collName).Find(&query).Limit(filter.Paginate.PerPage).Skip(int(filter.Paginate.Page * filter.Paginate.PerPage)).All(&ads)
+	count, _ := session.DB(config.Db).C(r.collName).Count()
 
-	return ads, nil
+	return ads, count, nil
 }
 
 func (r *AdRepository) GetAdById(_id string) (*models.Ad, error) {

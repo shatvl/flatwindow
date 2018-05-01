@@ -26,7 +26,7 @@ func (ac *AdController) GetProductsHandler(ctx iris.Context) {
 		return
 	}
 	
-	ads, err := ac.AdService.Repo.GetAdsWithFilter(request)
+	ads, count, err := ac.AdService.Repo.GetAdsWithFilter(request)
 
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
@@ -34,7 +34,7 @@ func (ac *AdController) GetProductsHandler(ctx iris.Context) {
 		return
 	}
 
-	ctx.JSON(iris.Map{"data": ads})
+	ctx.JSON(iris.Map{"data": iris.Map{"ads": ads, "count": count}})
 }
 
 func (ac *AdController) GetProductHandler(ctx iris.Context) {
