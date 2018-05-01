@@ -46,7 +46,7 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 }
 
 func (bc *BidController) GetBidsHandler(ctx iris.Context) {
-	request := &models.AdFilterRequest{}
+	request := &models.PaginateFiler{}
 
 	if err := ctx.ReadJSON(request); err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
