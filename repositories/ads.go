@@ -56,7 +56,7 @@ func (r *AdRepository) FindByTypeAndUID(t byte, uid string) (*models.Ad, error) 
 	return nil, nil
 }
 
-func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, int32, error) {
+func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*models.Ad, int, error) {
 	session := mongo.Session()
 	defer session.Close()
 
