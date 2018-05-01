@@ -8,6 +8,7 @@ import (
 	"github.com/shatvl/flatwindow/routes"
 	"github.com/shatvl/flatwindow/parsers"
 	"gopkg.in/mgo.v2"
+	"os"
 )
 
 func main() {
@@ -33,9 +34,9 @@ func main() {
 		ctx.Text("Works fine")
 	})
 
-	//port := os.Getenv("PORT")
+	port := os.Getenv("PORT")
 	app.Run(
-		iris.Addr(":" + "5000"),
+		iris.Addr(":" + port),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,
