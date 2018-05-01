@@ -48,7 +48,7 @@ func DeclareRoutes(app *iris.Application) {
 	admin := app.Party("/api/admin", crs).AllowMethods(iris.MethodOptions)
 	{
 		admin.Post("/products", controllers.NewAdController().GetProductsHandler)
-		admin.Get("/bids", controllers.NewBidController().GetBidsHandler)
+		admin.Post("/bids", controllers.NewBidController().GetBidsHandler)
 	}
 
 	fmt.Println(app.GetRoutes())
