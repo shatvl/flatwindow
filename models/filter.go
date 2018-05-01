@@ -15,6 +15,6 @@ type AdFilterRequest struct {
 }
 
 type PaginateFiler struct {
-	PerPage byte  `json:"per_page"`
-	Page    byte  `json:"page"`
+	PerPage int  `json:"perPage"`
+	Page    int  `json:"page"`
 }

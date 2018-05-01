@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab93942c-0792-4f51-8b02-ca00ea7f980b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/ad.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/filter.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/filter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/ads.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/ads.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/bid.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/bid.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/bid.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/bid.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -62,8 +55,8 @@
       <file leaf-file-name="ads.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/repositories/ads.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="72" column="40" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="40" />
+            <state relative-caret-position="255">
+              <caret line="67" column="59" lean-forward="true" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -80,8 +73,8 @@
       <file leaf-file-name="routes.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/routes.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="51" column="5" lean-forward="true" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+            <state relative-caret-position="180">
+              <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -108,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/models/filter.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+              <caret line="18" column="15" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -139,12 +132,12 @@
         <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/models/ad.go" />
         <option value="$PROJECT_DIR$/controllers/auth.go" />
-        <option value="$PROJECT_DIR$/models/filter.go" />
         <option value="$PROJECT_DIR$/repositories/ads.go" />
         <option value="$PROJECT_DIR$/services/bid.go" />
         <option value="$PROJECT_DIR$/repositories/bid.go" />
         <option value="$PROJECT_DIR$/repositories/user.go" />
         <option value="$PROJECT_DIR$/routes/routes.go" />
+        <option value="$PROJECT_DIR$/models/filter.go" />
       </list>
     </option>
   </component>
@@ -554,20 +547,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/repositories/ads.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="72" column="40" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/routes.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="51" column="5" lean-forward="true" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/auth.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -585,10 +564,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/routes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/repositories/ads.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="67" column="59" lean-forward="true" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models/filter.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <caret line="18" column="15" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
         </state>
       </provider>
     </entry>
