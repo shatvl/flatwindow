@@ -54,5 +54,5 @@ type Ad struct {
 	Currency         string   		   `xml:"currency" json:"currency"`
 	ModifiedDate	 string   		   `xml:"modified_date" json:"modifiedDate" bson:"modifiedDate"`
 	AgentType		 byte     		   `json:"agentType" bson:"agentType"`
-	Rss              map[string]string `json:"rss" bson:"rss"`
+	Rss              map[string]interface{} `json:"rss" bson:"rss"`
 }
