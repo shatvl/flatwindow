@@ -10,6 +10,11 @@ type AdFilter struct {
 }
 
 type AdFilterRequest struct {
-	Filter AdFilter `json:"filter"`
-	Page   byte		`json:"page"`
+	Filter   AdFilter `json:"filter"`
+	Paginate PaginateFiler `json:"paginate"`
+}
+
+type PaginateFiler struct {
+	PerPage byte  `json:"per_page"`
+	Page    byte  `json:"page"`
 }

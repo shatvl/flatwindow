@@ -22,7 +22,7 @@ type Photos struct {
 
 type Photo struct {
 	XMLName xml.Name `xml:"photo" bson:"-" json:"-"`
-	Picture string   `xml:"picture,attr"`
+	Picture string   `xml:"picture,attr" json:"picture" bson:"picture"`
 }
 
 type Ad struct {

@@ -29,7 +29,7 @@ func (r *UserRepository) Create(user *models.User) (*models.User, error) {
 	_, err := r.FindByEmail(user.Email)
 
 	if err == nil || string(user.Password) == "" || user.Email == "" {
-		return nil, errors.New("User already exists")
+		return nil, errors.New("user already exists")
 	}
 
 	passsword, err := models.GeneratePassword(user.Password)

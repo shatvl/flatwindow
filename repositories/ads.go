@@ -11,7 +11,6 @@ import (
 
 const (
 	TsType = 101
-	AdsPerPage = 9
 )
 
 // AdRepository with "ads" collection
@@ -66,7 +65,7 @@ func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*mode
 
 	query := getFilterQuery(&filter.Filter)
 
-	session.DB(config.Db).C(r.collName).Find(&query).Limit(AdsPerPage).Skip(int(filter.Page * AdsPerPage)).All(&ads)
+	session.DB(config.Db).C(r.collName).Find(&query).Limit(filter.Paginate.PerPage).Skip(int(filter.Paginate.Page * filter.Paginate.PerPage)).All(&ads)
 
 	return ads, nil
 }

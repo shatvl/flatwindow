@@ -20,7 +20,7 @@ func DeclareRoutes(app *iris.Application) {
 	})
 
 	//Enable jwt middleware
-	jwt := jwtmiddleware.New(jwtmiddleware.Config{
+	jwtApi := jwtmiddleware.New(jwtmiddleware.Config{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
 			return []byte(config.Secret), nil
 		},
@@ -42,8 +42,13 @@ func DeclareRoutes(app *iris.Application) {
 		api.Post("/products", controllers.NewAdController().GetProductsHandler)
 		api.Get("/product/{_id:string}", controllers.NewAdController().GetProductHandler)
 		api.Post("/bid", controllers.NewBidController().BidAdHandler)
-		api.Get("/bids", controllers.NewBidController().GetBidsHandler)
-		api.Post("/me", jwt.Serve, controllers.NewAuthController().MeHandler)
+		api.Post("/me", jwtApi.Serve, controllers.NewAuthController().MeHandler)
+	}
+
+	admin := app.Party("/api/admin", crs).AllowMethods(iris.MethodOptions)
+	{
+		admin.Post("/products", controllers.NewAdController().GetProductsHandler)
+		admin.Get("/bids", controllers.NewBidController().GetBidsHandler)
 	}
 
 	fmt.Println(app.GetRoutes())
