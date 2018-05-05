@@ -17,7 +17,7 @@ func DeclareRoutes(app *iris.Application) {
 	crs := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
 		AllowCredentials: true,
-		AllowedMethods: []string{"*"},
+		AllowedMethods: []string{"GET", "POST", "HEAD"},
 	})
 
 	//Enable jwt middleware
