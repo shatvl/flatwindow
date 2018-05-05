@@ -8,8 +8,8 @@ import (
 	"github.com/shatvl/flatwindow/routes"
 	"github.com/shatvl/flatwindow/parsers"
 	"gopkg.in/mgo.v2"
-	"github.com/shatvl/flatwindow/jobs"
 	"os"
+	"github.com/shatvl/flatwindow/jobs"
 )
 
 func main() {
@@ -32,7 +32,7 @@ func main() {
 	routes.DeclareRoutes(app)
 	
 	gocron.Every(1).Day().At("19:00").Do(parsers.NewTSParser().Parse)
-	gocron.Every(30).Seconds().Do(jobs.NewFeed().CreateTSFeed)
+	gocron.Every(30).Seconds().Do(jobs.NewFeed().CreateFeed)
 	gocron.Start()
 
 	//Index route for check if build works fine

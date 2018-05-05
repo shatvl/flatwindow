@@ -11,11 +11,9 @@ import (
 
 const (
 	TsType = 101
-	TsTypeCode = "ts"
-	KnType = 102
 )
 
-var feedTypeToName = map[int]string{
+var FeedTypeToName = map[int]string{
 	101: "ts",
 	102: "kn",
 	103: "rt",
@@ -98,14 +96,14 @@ func (r *AdRepository) GetAdById(_id string) (*models.Ad, error) {
 
 // AddAdToFeed method add ad to feed for the any playform type (onliner, kufer and etc.)
 func (r *AdRepository) AddAdToFeed(_id bson.ObjectId, feedType int, value bool) error {
-	if feedTypeToName[feedType] == "" {
+	if FeedTypeToName[feedType] == "" {
 		return errors.New("unexpected feed type")
 	}
 
 	session := mongo.Session()
 	defer session.Close()
 
-	err := session.DB(config.Db).C(r.collName).Update(bson.M{"_id": _id}, bson.M{"$set": bson.M{"rss." + feedTypeToName[feedType]: value}})
+	err := session.DB(config.Db).C(r.collName).Update(bson.M{"_id": _id}, bson.M{"$set": bson.M{"rss." + FeedTypeToName[feedType]: value}})
 
 	return err
 }

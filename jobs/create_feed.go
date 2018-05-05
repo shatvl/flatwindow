@@ -21,27 +21,29 @@ type XmlFeed struct {
 	Records []*models.Ad `xml:"record"`
 }
 
-func (f *Feed) CreateTSFeed() {
-	ads, err := f.AdService.GetAgentAdsForFeedByCode(repositories.TsTypeCode)
+func (f *Feed) CreateFeed() {
+	for _, name := range repositories.FeedTypeToName {
+		ads, err := f.AdService.GetAgentAdsForFeedByCode(name)
 
-	if err != nil {
-		return
+		if err != nil {
+			return
+		}
+
+		xmlFeed := &XmlFeed{Records: ads}
+		adsXml, err := xml.MarshalIndent(xmlFeed, " ", "  ")
+
+		if err != nil {
+			return
+		}
+
+		fout, err := os.Create("public/xml/" + name + "_feed.xml")
+		defer fout.Close()
+
+		if err != nil {
+			return
+		}
+
+		fout.Write([]byte(xml.Header))
+		fout.Write(adsXml)
 	}
-
-	xmlFeed := &XmlFeed{Records: ads}
-	adsXml, err := xml.MarshalIndent(xmlFeed, " ", "  ")
-
-	if err != nil {
-		return
-	}
-
-	fout, err := os.Create("public/xml/" + "tsfeed.xml")
-	defer fout.Close()
-
-	if err != nil {
-		return
-	}
-
-	fout.Write([]byte(xml.Header))
-	fout.Write(adsXml)
 }

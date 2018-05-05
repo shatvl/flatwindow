@@ -82,5 +82,5 @@ func (bc *BidController) UpdateBidHandler(ctx iris.Context) {
 		return
 	}
 
-	ctx.JSON(iris.Map{"data": bid})
+	ctx.StatusCode(iris.StatusNoContent)
 }
