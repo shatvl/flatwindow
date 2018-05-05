@@ -17,7 +17,7 @@ func DeclareRoutes(app *iris.Application) {
 	crs := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
 		AllowCredentials: true,
-		AllowedMethods: []string{"GET", "POST", "HEAD"},
+		AllowedMethods: []string{"GET", "POST", "HEAD", "OPTIONS", "PUT"},
 	})
 
 	//Enable jwt middleware
@@ -32,13 +32,13 @@ func DeclareRoutes(app *iris.Application) {
 		SigningMethod: jwt.SigningMethodHS256,
 	})
 
-	auth := app.Party("/auth", crs).AllowMethods(iris.MethodOptions)
+	auth := app.Party("/auth", crs)
 	{
 		auth.Post("/register", controllers.NewAuthController().RegisterHandler)
 		auth.Post("/login", controllers.NewAuthController().LoginHandler)
 	}
 
-	api := app.Party("/api", crs).AllowMethods(iris.MethodOptions)
+	api := app.Party("/api", crs)
 	{			
 		api.Post("/products", controllers.NewAdController().GetProductsHandler)
 		api.Get("/product/{_id:string}", controllers.NewAdController().GetProductHandler)
@@ -46,7 +46,7 @@ func DeclareRoutes(app *iris.Application) {
 		api.Post("/me", jwtApi.Serve, controllers.NewAuthController().MeHandler)
 	}
 
-	admin := app.Party("/api/admin", crs).AllowMethods(iris.MethodOptions)
+	admin := app.Party("/api/admin", crs)
 	{
 		admin.Post("/products", controllers.NewAdController().GetProductsHandler)
 		admin.Post("/product/feed", controllers.NewAdController().AddAdToFeed)
