@@ -32,7 +32,7 @@ func main() {
 	routes.DeclareRoutes(app)
 	
 	gocron.Every(1).Day().At("19:00").Do(parsers.NewTSParser().Parse)
-	gocron.Every(30).Seconds().Do(jobs.NewFeed().CreateFeed)
+	gocron.Every(1).Hour().Do(jobs.NewFeed().CreateFeed)
 	gocron.Start()
 
 	//Index route for check if build works fine
