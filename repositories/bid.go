@@ -57,7 +57,13 @@ func (r *BidRepository) UpdateBid(bid *models.UpdatedBid) error {
 	session := mongo.Session()
 	defer session.Close()
 
-	err := session.DB(config.Db).C(r.collName).UpdateId(bid.ID, bid)
+	err := session.DB(config.Db).C(r.collName).UpdateId(bid.ID, bson.M{"$set": bson.M{
+																		"fullname": bid.Fullname,
+																		"email": bid.Email,
+																		"phone": bid.Phone,
+																		"city": bid.City,
+																		"message": bid.Message,
+																		"processed": bid.Processed}})
 
 	return err
 }
