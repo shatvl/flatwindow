@@ -50,6 +50,7 @@ func DeclareRoutes(app *iris.Application) {
 		admin.Post("/products", controllers.NewAdController().GetProductsHandler)
 		admin.Post("/product/feed", controllers.NewAdController().AddAdToFeed)
 		admin.Post("/bids", controllers.NewBidController().GetBidsHandler)
+		admin.Put("/bid", controllers.NewBidController().UpdateBidHandler)
 	}
 
 	fmt.Println(app.GetRoutes())

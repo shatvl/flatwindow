@@ -64,3 +64,23 @@ func (bc *BidController) GetBidsHandler(ctx iris.Context) {
 
 	ctx.JSON(iris.Map{"data": iris.Map{"bids": bids, "count": count}})
 }
+
+func (bc *BidController) UpdateBidHandler(ctx iris.Context) {
+	bid := &models.Bid{}
+
+	if err := ctx.ReadJSON(bid); err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		ctx.JSON(iris.Map{"error": err.Error()})
+		return
+	}
+
+	err := bc.BidService.UpdateBid(bid)
+
+	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		ctx.JSON(iris.Map{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(iris.Map{"data": bid})
+}
