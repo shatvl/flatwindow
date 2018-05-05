@@ -11,6 +11,7 @@ import (
 
 const (
 	TsType = 101
+	TsTypeCode = "ts"
 )
 
 var feedTypeToName = map[int]string{
@@ -106,6 +107,17 @@ func (r *AdRepository) AddAdToFeed(_id bson.ObjectId, feedType int, value bool) 
 	err := session.DB(config.Db).C(r.collName).Update(bson.M{"_id": _id}, bson.M{"$set": bson.M{"rss." + feedTypeToName[feedType]: value}})
 
 	return err
+}
+
+func (r *AdRepository) GetAdsForFeedByAgentCode(code string) ([]*models.Ad, error) {
+	session := mongo.Session()
+	defer session.Close()
+
+	ads := make([]*models.Ad,0)
+
+	err := session.DB(config.Db).C(r.collName).Find(bson.M{"rss." + code: true}).All(&ads)
+
+	return ads, err
 }
 
 func getFilterQuery(filter *models.AdFilter) (*bson.M){

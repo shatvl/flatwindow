@@ -49,10 +49,20 @@ func (s *AdService) CreateAd(ad *models.Ad) (error) {
 }
 
 // Add ad to feed for any platform
-func (s *AdService) AddAdToFeed(_id string, feedType int, value bool) error{
+func (s *AdService) AddAdToFeed(_id string, feedType int, value bool) error {
 	if !bson.IsObjectIdHex(_id) {
 		return errors.New(`Invalid _id`)
 	}
 
 	return s.Repo.AddAdToFeed(bson.ObjectIdHex(_id), feedType, value)
+}
+
+func (s *AdService) GetAgentAdsForFeedByCode(code string) ([]*models.Ad, error) {
+	ads, err := s.Repo.GetAdsForFeedByAgentCode(code)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return ads, err
 }

@@ -20,6 +20,6 @@ type Bid struct {
 	AboutMeType byte          `json:"about_me_type" bson:"about_me_type"`
 	Campaign    bool          `json:"campaign" bson:"-"`
 	CopyEmail   bool          `json:"copy_email" bson:"-"`
-	PriceChange bool          `json:"pWWrice_change" bson:"price_change"`
+	PriceChange bool          `json:"price_change" bson:"price_change"`
 	Ads         Ad			  `json:"ad" bson:"ads"`
 }

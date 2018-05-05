@@ -2,14 +2,13 @@ package main
 
 import (
 	"log"
-	"os"
-
 	"github.com/kataras/iris"
 	"github.com/jasonlvhit/gocron"
 	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/routes"
 	"github.com/shatvl/flatwindow/parsers"
 	"gopkg.in/mgo.v2"
+	"github.com/shatvl/flatwindow/jobs"
 )
 
 func main() {
@@ -24,10 +23,15 @@ func main() {
 	mongo.SetSession(session)
 	mongo.InitIndexes()
 
+	//static assets
+	app.Use(iris.Gzip)
+	app.StaticWeb("/static/xml", "./public/xml")
+
 	// Declare all routes
 	routes.DeclareRoutes(app)
 	
 	gocron.Every(1).Day().At("19:00").Do(parsers.NewTSParser().Parse)
+	gocron.Every(30).Seconds().Do(jobs.NewFeed().CreateTSFeed)
 	gocron.Start()
 
 	//Index route for check if build works fine
@@ -35,9 +39,9 @@ func main() {
 		ctx.Text("Works fine")
 	})
 
-	port := os.Getenv("PORT")
+	//port := os.Getenv("PORT")
 	app.Run(
-		iris.Addr(":" + port),
+		iris.Addr(":" + "5000"),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,

@@ -268,11 +268,6 @@
 			"Rev": "30e450625213468c7ec31fec6102dab6504adcc9"
 		},
 		{
-			"ImportPath": "github.com/klauspost/crc32",
-			"Comment": "v1.1-5-gbab58d7",
-			"Rev": "bab58d77464aa9cf4e84200c3276da0831fe0c03"
-		},
-		{
 			"ImportPath": "github.com/mattn/go-colorable",
 			"Comment": "v0.0.9-14-gefa5899",
 			"Rev": "efa589957cd060542a26d2dd7832fd6a6c6c3ade"
