@@ -53,11 +53,11 @@ func (r *BidRepository) GetPaginatedBids(filter *models.AdFilterRequest) ([]*mod
 	return bids, count, err
 }
 
-func (r *BidRepository) UpdateOrCreateBid(bid *models.UpdatedBid) error {
+func (r *BidRepository) UpdateBid(bid *models.UpdatedBid) error {
 	session := mongo.Session()
 	defer session.Close()
 
-	_, err := session.DB(config.Db).C(r.collName).UpsertId(bid.ID, bid)
+	err := session.DB(config.Db).C(r.collName).UpdateId(bid.ID, bid)
 
 	return err
 }

@@ -29,5 +29,5 @@ func (bs *BidService) GetPaginatedBids(filter *models.AdFilterRequest) ([]*model
 }
 
 func (bs *BidService) UpdateBid(bid *models.UpdatedBid) error {
-	return bs.Repo.UpdateOrCreateBid(bid)
+	return bs.Repo.UpdateBid(bid)
 }
