@@ -32,13 +32,13 @@ func DeclareRoutes(app *iris.Application) {
 		SigningMethod: jwt.SigningMethodHS256,
 	})
 
-	auth := app.Party("/auth", crs)
+	auth := app.Party("/auth", crs).AllowMethods(iris.MethodOptions)
 	{
 		auth.Post("/register", controllers.NewAuthController().RegisterHandler)
 		auth.Post("/login", controllers.NewAuthController().LoginHandler)
 	}
 
-	api := app.Party("/api", crs)
+	api := app.Party("/api", crs).AllowMethods(iris.MethodOptions)
 	{			
 		api.Post("/products", controllers.NewAdController().GetProductsHandler)
 		api.Get("/product/{_id:string}", controllers.NewAdController().GetProductHandler)
@@ -46,7 +46,7 @@ func DeclareRoutes(app *iris.Application) {
 		api.Post("/me", jwtApi.Serve, controllers.NewAuthController().MeHandler)
 	}
 
-	admin := app.Party("/api/admin", crs)
+	admin := app.Party("/api/admin", crs).AllowMethods(iris.MethodOptions)
 	{
 		admin.Post("/products", controllers.NewAdController().GetProductsHandler)
 		admin.Post("/product/feed", controllers.NewAdController().AddAdToFeed)

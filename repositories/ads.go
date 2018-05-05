@@ -12,6 +12,7 @@ import (
 const (
 	TsType = 101
 	TsTypeCode = "ts"
+	KnType = 102
 )
 
 var feedTypeToName = map[int]string{
