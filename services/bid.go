@@ -28,6 +28,6 @@ func (bs *BidService) GetPaginatedBids(filter *models.AdFilterRequest) ([]*model
 	return bs.Repo.GetPaginatedBids(filter)
 }
 
-func (bs *BidService) UpdateBid(bid *models.Bid) error {
+func (bs *BidService) UpdateBid(bid *models.UpdatedBid) error {
 	return bs.Repo.UpdateOrCreateBid(bid)
 }
