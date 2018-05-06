@@ -50,7 +50,7 @@ func DeclareRoutes(app *iris.Application) {
 
 	adminAuth := app.Party("/api/admin/auth", crs).AllowMethods(iris.MethodOptions)
 	{
-		adminAuth.Post("/auth/login", adminc.NewAuthController().LoginHandler)
+		adminAuth.Post("/login", adminc.NewAuthController().LoginHandler)
 	}
 
 	adminApi := app.Party("/api/admin", crs, middleware.AgentRoleResolverMiddleware, jwtApi.Serve).AllowMethods(iris.MethodOptions)
