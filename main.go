@@ -11,6 +11,7 @@ import (
 	"github.com/shatvl/flatwindow/jobs"
 	"github.com/shatvl/flatwindow/seed"
 	"github.com/shatvl/flatwindow/repositories"
+	"os"
 )
 
 func main() {
@@ -43,9 +44,9 @@ func main() {
 		ctx.Text("Works fine")
 	})
 
-	//port := os.Getenv("PORT")
+	port := os.Getenv("PORT")
 	app.Run(
-		iris.Addr(":" + "5000"),
+		iris.Addr(":" + port),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,
