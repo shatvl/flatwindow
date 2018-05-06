@@ -126,6 +126,9 @@ func (r *AdRepository) GetAdsForFeedByAgentCode(code string) ([]*models.Ad, erro
 func getFilterQuery(filter *models.AdFilter) (*bson.M){
 	query := bson.M{}
 
+	if filter.AgentType != 0 {
+		query["agentType"] = bson.M{"$eq": filter.AgentType}
+	}
 	if filter.Rooms != 0 {
 		query["rooms"] = bson.M{"$gt": filter.Rooms}	
 	}

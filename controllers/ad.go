@@ -50,30 +50,3 @@ func (ac *AdController) GetProductHandler(ctx iris.Context) {
 
 	ctx.JSON(iris.Map{"data": ad})
 }
-
-type addAdToFeedRequest struct {
-	AdId     string `json:"adId"`
-	FeedType int    `json:"feedType"`
-	Value    bool   `json:"value"`
-}
-
-func (ac *AdController) AddAdToFeed(ctx iris.Context) {
-	var request addAdToFeedRequest
-
-	if err := ctx.ReadJSON(&request); err != nil {
-		ctx.StatusCode(iris.StatusBadRequest)
-		ctx.JSON(iris.Map{"error": err.Error()})
-		return
-	}
-
-	err := ac.AdService.AddAdToFeed(request.AdId, request.FeedType, request.Value)
-
-	if err != nil {
-		ctx.StatusCode(iris.StatusBadRequest)
-		ctx.JSON(iris.Map{"error": err.Error()})
-		return
-	}
-
-	ctx.StatusCode(iris.StatusNoContent)
-	ctx.JSON(iris.Map{"norm": "norm"})
-}

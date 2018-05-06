@@ -9,6 +9,8 @@ import (
 	"github.com/shatvl/flatwindow/config"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/kataras/iris/context"
+	"github.com/shatvl/flatwindow/controllers/admin"
+	"github.com/shatvl/flatwindow/middleware"
 )
 
 //DeclareRoutes for the app
@@ -46,13 +48,17 @@ func DeclareRoutes(app *iris.Application) {
 		api.Post("/bid", controllers.NewBidController().BidAdHandler)
 	}
 
-	admin := app.Party("/api/admin", crs).AllowMethods(iris.MethodOptions)
+	adminAuth := app.Party("/api/admin/auth", crs).AllowMethods(iris.MethodOptions)
 	{
-		admin.Post("/auth/login", controllers.NewAuthController().LoginHandler)
-		admin.Post("/products", controllers.NewAdController().GetProductsHandler)
-		admin.Post("/product/feed", controllers.NewAdController().AddAdToFeed)
-		admin.Post("/bids", controllers.NewBidController().GetBidsHandler)
-		admin.Put("/bid", controllers.NewBidController().UpdateBidHandler)
+		adminAuth.Post("/auth/login", adminc.NewAuthController().LoginHandler)
+	}
+
+	adminApi := app.Party("/api/admin", crs, middleware.AgentRoleResolverMiddleware, jwtApi.Serve).AllowMethods(iris.MethodOptions)
+	{
+		adminApi.Post("/products", adminc.NewAdController().GetProductsHandler)
+		adminApi.Post("/product/feed", adminc.NewAdController().AddAdToFeed)
+		adminApi.Post("/bids", adminc.NewBidController().GetBidsHandler)
+		adminApi.Put("/bid", adminc.NewBidController().UpdateBidHandler)
 	}
 
 	fmt.Println(app.GetRoutes())

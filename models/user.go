@@ -31,6 +31,12 @@ type UserJSON struct {
 type JwtClaims struct {
 	Email     string `json:"email"`
 	Role      string `json:"role"`
+	jwt.StandardClaims
+}
+
+type JwtAdminClaims struct {
+	Email     string `json:"email"`
+	Role      string `json:"role"`
 	AgentType byte   `json:"agent_type"`
 	AgentCode string `json:"agent_code"`
 	jwt.StandardClaims
