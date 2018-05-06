@@ -5,10 +5,7 @@ package controllers
 		"github.com/shatvl/flatwindow/services"
 
 		"github.com/kataras/iris"
-		"github.com/dgrijalva/jwt-go/request"
-		"github.com/dgrijalva/jwt-go"
-		"fmt"
-		"github.com/shatvl/flatwindow/config"
+		"github.com/shatvl/flatwindow/helpers"
 	)
 
 // AuthController provides login, register api
@@ -59,14 +56,7 @@ func (ac *AuthController) LoginHandler(ctx iris.Context) {
 }
 
 func (ac *AuthController) MeHandler(ctx iris.Context) {
-	token, err := request.ParseFromRequest(ctx.Request(), request.AuthorizationHeaderExtractor, func(token *jwt.Token) (interface{}, error) {
-		// Don't forget to validate the alg is what you expect:
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
-		}
-
-		return []byte(config.Secret), nil
-	})
+	token, err := helpers.RetrieveTokenFromRequest(ctx.Request())
 
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)

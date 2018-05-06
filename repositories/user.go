@@ -40,7 +40,9 @@ func (r *UserRepository) Create(user *models.User) (*models.User, error) {
 
 	user.ID = bson.NewObjectId()
 	user.Password = string(passsword)
-	user.Role = config.ROLE_USER
+	if user.Role == "" {
+		user.Role = config.ROLE_USER
+	}
 	user.Active = true //ACTIVATED USER BY DEFAULT
 
 	err = session.DB(config.Db).C(r.collName).Insert(&user)

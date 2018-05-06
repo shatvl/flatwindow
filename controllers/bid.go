@@ -4,6 +4,8 @@ import (
 	"github.com/shatvl/flatwindow/services"
 	"github.com/kataras/iris"
 	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/helpers"
+	"github.com/dgrijalva/jwt-go"
 )
 
 type BidController struct {
@@ -46,13 +48,24 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 }
 
 func (bc *BidController) GetBidsHandler(ctx iris.Context) {
-	request := &models.AdFilterRequest{}
+	token, err := helpers.RetrieveTokenFromRequest(ctx.Request())
+
+	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		ctx.JSON(iris.Map{"error": err.Error()})
+		return
+	}
+
+	claims := token.Claims.(jwt.MapClaims)
+
+	request := &models.BidFilterRequest{AgentType: byte(claims["agent_type"].(float64))}
 
 	if err := ctx.ReadJSON(request); err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
 		ctx.JSON(iris.Map{"error": err.Error()})
 		return
 	}
+
 
 	bids, count, err := bc.BidService.GetPaginatedBids(request)
 

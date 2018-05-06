@@ -24,6 +24,7 @@ type Bid struct {
 	PriceChange bool          `json:"price_change" bson:"price_change"`
 	Ads         Ad			  `json:"ad" bson:"ads"`
 	Processed   bool 		  `json:"processed" bson:"processed"`
+	AgentType   byte 		  `json:"-" bson:"agent_type"`
 }
 
 type UpdatedBid struct {

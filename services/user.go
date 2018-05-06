@@ -25,12 +25,6 @@ func NewUserService() *UserService {
 	}
 }
 
-type jwtClaims struct {
-	Email string `json:"email"`
-	Role  string `json:"role"`
-	jwt.StandardClaims
-}
-
 // GenerateToken generates token for user
 func (s *UserService) GenerateToken(credentials *models.Credentials) (string, *models.User, error) {
 	foundUser, err := s.Repo.FindByEmail(credentials.Email)
@@ -45,9 +39,11 @@ func (s *UserService) GenerateToken(credentials *models.Credentials) (string, *m
 		return "", nil, errors.New(`Invalid email or password`)
 	}
 
-	claims := &jwtClaims{
+	claims := &models.JwtClaims{
 		foundUser.Email,
 		foundUser.Role,
+		foundUser.AgentType,
+		foundUser.AgentCode,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
 		},

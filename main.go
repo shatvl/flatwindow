@@ -8,8 +8,9 @@ import (
 	"github.com/shatvl/flatwindow/routes"
 	"github.com/shatvl/flatwindow/parsers"
 	"gopkg.in/mgo.v2"
-	"os"
 	"github.com/shatvl/flatwindow/jobs"
+	"github.com/shatvl/flatwindow/seed"
+	"github.com/shatvl/flatwindow/repositories"
 )
 
 func main() {
@@ -30,9 +31,11 @@ func main() {
 
 	// Declare all routes
 	routes.DeclareRoutes(app)
-	
+
+	seed.SeedAgents()
+
 	gocron.Every(1).Day().At("19:00").Do(parsers.NewTSParser().Parse)
-	gocron.Every(1).Hour().Do(jobs.NewFeed().CreateFeed)
+	gocron.Every(1).Hour().Do(jobs.NewFeed().CreateFeed, repositories.FeedTypeToName[repositories.TsType])
 	gocron.Start()
 
 	//Index route for check if build works fine
@@ -40,9 +43,9 @@ func main() {
 		ctx.Text("Works fine")
 	})
 
-	port := os.Getenv("PORT")
+	//port := os.Getenv("PORT")
 	app.Run(
-		iris.Addr(":" + port),
+		iris.Addr(":" + "5000"),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,

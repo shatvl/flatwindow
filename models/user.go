@@ -5,6 +5,7 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/mgo.v2/bson"
+	"github.com/dgrijalva/jwt-go"
 )
 
 // User
@@ -15,6 +16,8 @@ type User struct {
 	CreatedAt time.Time     `json:"created_at"`
 	Role      string        `json:"role"`
 	Active    bool          `json:"active"`
+	AgentType byte 			`json:"agentType,omitempty" bson:"agent_type"`
+	AgentCode string		`json:"agentCode,omitempty" bson:"agent_code"`
 }
 
 type UserJSON struct {
@@ -23,6 +26,14 @@ type UserJSON struct {
 	CreatedAt  time.Time     `json:"created_at"`
 	Role	   string 		 `json:"role"`
 	Active	   bool			 `json:"active"`
+}
+
+type JwtClaims struct {
+	Email     string `json:"email"`
+	Role      string `json:"role"`
+	AgentType byte   `json:"agent_type"`
+	AgentCode string `json:"agent_code"`
+	jwt.StandardClaims
 }
 
 // GeneratePassword will generate a hashed password by users input password

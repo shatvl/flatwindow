@@ -6,6 +6,7 @@ import (
 
 	"encoding/xml"
 	"fmt"
+	"github.com/shatvl/flatwindow/repositories"
 )
 
 // Tvoya Stolica parser
@@ -35,7 +36,7 @@ func (ts *TSParser) Parse() {
 	}
 
 	for i := 0; i < len(uedb.Records.Records); i++ {
-		ts.AdService.CreateAd(&uedb.Records.Records[i])
+		ts.AdService.CreateAd(&uedb.Records.Records[i], repositories.TsType)
 	}
 }
 

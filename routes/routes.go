@@ -36,6 +36,7 @@ func DeclareRoutes(app *iris.Application) {
 	{
 		auth.Post("/register", controllers.NewAuthController().RegisterHandler)
 		auth.Post("/login", controllers.NewAuthController().LoginHandler)
+		auth.Post("/me", jwtApi.Serve, controllers.NewAuthController().MeHandler)
 	}
 
 	api := app.Party("/api", crs).AllowMethods(iris.MethodOptions)
@@ -43,11 +44,11 @@ func DeclareRoutes(app *iris.Application) {
 		api.Post("/products", controllers.NewAdController().GetProductsHandler)
 		api.Get("/product/{_id:string}", controllers.NewAdController().GetProductHandler)
 		api.Post("/bid", controllers.NewBidController().BidAdHandler)
-		api.Post("/me", jwtApi.Serve, controllers.NewAuthController().MeHandler)
 	}
 
 	admin := app.Party("/api/admin", crs).AllowMethods(iris.MethodOptions)
 	{
+		admin.Post("/auth/login", controllers.NewAuthController().LoginHandler)
 		admin.Post("/products", controllers.NewAdController().GetProductsHandler)
 		admin.Post("/product/feed", controllers.NewAdController().AddAdToFeed)
 		admin.Post("/bids", controllers.NewBidController().GetBidsHandler)

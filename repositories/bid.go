@@ -27,7 +27,7 @@ func (r *BidRepository) CreateBid(bid *models.Bid) (error){
 	return err
 }
 
-func (r *BidRepository) GetPaginatedBids(filter *models.AdFilterRequest) ([]*models.Bid, int, error) {
+func (r *BidRepository) GetPaginatedBids(filter *models.BidFilterRequest) ([]*models.Bid, int, error) {
 	session := mongo.Session()
 	defer session.Close()
 

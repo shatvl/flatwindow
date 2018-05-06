@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <records>
+   <record unid="003417946090">
+     <ID>5ac9006c58d536fdb302a936</ID>
+     <subject> 3-к квартира  Руссиянова ул., 5/2 </subject>
+     <remuneration_type>1</remuneration_type>
+     <link> https://www.t-s.by/buy/flats/900961/ </link>
+     <phone> (8-017) 215-03-31, (8-029) 564-53-61, (8-044) 564-53-61 </phone>
+     <contact_person> Офис &#34;Центральный&#34; </contact_person>
+     <photos></photos>
+     <condition>1</condition>
+     <address> Минск Руссиянова ул. д. 5 </address>
+     <area>24</area>
+     <region>7</region>
+     <metro>28</metro>
+     <rooms>3</rooms>
+     <category>1010</category>
+     <type>sell</type>
+     <year_built>1988</year_built>
+     <floor>1</floor>
+     <house_type>1</house_type>
+     <size>63.3</size>
+     <size_living_space>43</size_living_space>
+     <size_kitchen>7.2</size_kitchen>
+     <body>  </body>
+     <price>77000</price>
+     <currency>USD</currency>
+     <modified_date> 2018-04-07 </modified_date>
+     <AgentType>101</AgentType>
+   </record>
+ </records>

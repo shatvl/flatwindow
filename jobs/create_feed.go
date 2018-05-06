@@ -21,7 +21,7 @@ type XmlFeed struct {
 	Records []*models.Ad `xml:"record"`
 }
 
-func (f *Feed) CreateFeed() {
+func (f *Feed) CreateFeed(agentType string) {
 	for _, name := range repositories.FeedTypeToName {
 		ads, err := f.AdService.GetAgentAdsForFeedByCode(name)
 
@@ -36,7 +36,7 @@ func (f *Feed) CreateFeed() {
 			return
 		}
 
-		fout, err := os.Create("public/xml/" + name + "_feed.xml")
+		fout, err := os.Create("public/xml/" + agentType + "/" + name + "_feed.xml")
 		defer fout.Close()
 
 		if err != nil {

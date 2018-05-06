@@ -11,6 +11,10 @@ import (
 
 const (
 	TsType = 101
+	KnType = 102
+	RtType = 103
+	OnType = 104
+	KfType = 105
 )
 
 var FeedTypeToName = map[int]string{
@@ -52,7 +56,7 @@ func (r *AdRepository) FindByTypeAndUID(t byte, uid string) (*models.Ad, error) 
 	switch t {
 		case TsType:
 			ad := models.Ad{}
-			err := session.DB(config.Db).C(r.collName).Find(bson.M{"agentType": TsType, "unid": uid}).One(&ad)
+			err := session.DB(config.Db).C(r.collName).Find(bson.M{"agentType": t, "unid": uid}).One(&ad)
 			
 			if err != nil {
 				return nil, err
@@ -74,7 +78,7 @@ func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*mode
 	query := getFilterQuery(&filter.Filter)
 
 	session.DB(config.Db).C(r.collName).Find(&query).Limit(filter.Paginate.PerPage).Skip(int(filter.Paginate.Page * filter.Paginate.PerPage)).All(&ads)
-	count, _ := session.DB(config.Db).C(r.collName).Count()
+	count, _ := session.DB(config.Db).C(r.collName).Find(&query).Count()
 
 	return ads, count, nil
 }

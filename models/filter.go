@@ -7,11 +7,17 @@ type AdFilter struct {
 	Type 		byte	`json:"type"`
 	Rooms 		byte	`json:"rooms"`
 	Text		string	`json:"text"`
+	AgentType   byte    `json:"agentType"`
 }
 
 type AdFilterRequest struct {
 	Filter   AdFilter `json:"filter"`
 	Paginate PaginateFiler `json:"paginate"`
+}
+
+type BidFilterRequest struct {
+	AgentType byte          `json:"agent_type"`
+	Paginate  PaginateFiler `json:"paginate"`
 }
 
 type PaginateFiler struct {

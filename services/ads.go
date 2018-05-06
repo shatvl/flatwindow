@@ -25,11 +25,11 @@ func NewAdService() *AdService {
 }
 
 // CreateAd creates or updates ad for t-s ads
-func (s *AdService) CreateAd(ad *models.Ad) (error) {
+func (s *AdService) CreateAd(ad *models.Ad, agentType byte) (error) {
 	session := mongo.Session()
 	defer session.Close()
 	
-	foundAd, err := s.Repo.FindByTypeAndUID(repositories.TsType, ad.Unid)
+	foundAd, err := s.Repo.FindByTypeAndUID(agentType, ad.Unid)
 
 	if err == nil {
 		fmt.Println("Ad is found: " + foundAd.Unid)
