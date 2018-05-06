@@ -18,6 +18,7 @@ func DeclareRoutes(app *iris.Application) {
 	//Enable CORS middleware
 	crs := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
+		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 		AllowedMethods: []string{"GET", "POST", "HEAD", "OPTIONS", "PUT"},
 	})
