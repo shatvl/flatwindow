@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab93942c-0792-4f51-8b02-ca00ea7f980b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/helpers/token.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seed/agents.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/bid.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/bid.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flatwindow.exe" beforeDir="false" afterPath="$PROJECT_DIR$/flatwindow.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jobs/create_feed.go" beforeDir="false" afterPath="$PROJECT_DIR$/jobs/create_feed.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ad.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/ad.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/bid.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/bid.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/filter.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/filter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsers/ts.go" beforeDir="false" afterPath="$PROJECT_DIR$/parsers/ts.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/xml/tsfeed.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/ads.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/ads.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/bid.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/bid.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repositories/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/ads.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/ads.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/bid.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/bid.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/user.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,20 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ads.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/repositories/ads.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="82" column="26" lean-forward="true" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+            <state relative-caret-position="493">
+              <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -97,11 +67,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="on_feed.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="on_feed.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/xml/ts/on_feed.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
               <caret line="16" column="14" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mail.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/mail.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -183,11 +162,11 @@
         <option value="$PROJECT_DIR$/services/bid.go" />
         <option value="$PROJECT_DIR$/controllers/bid.go" />
         <option value="$PROJECT_DIR$/jobs/create_feed.go" />
-        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/repositories/ads.go" />
         <option value="$PROJECT_DIR$/repositories/bid.go" />
         <option value="$PROJECT_DIR$/models/user.go" />
         <option value="$PROJECT_DIR$/routes/routes.go" />
+        <option value="$PROJECT_DIR$/main.go" />
       </list>
     </option>
   </component>
@@ -388,13 +367,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/mail.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -675,13 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/repositories/user.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -716,6 +681,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="14" lean-forward="true" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/mail.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
         </state>
       </provider>
     </entry>
