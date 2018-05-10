@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"github.com/shatvl/flatwindow/services"
 	"github.com/kataras/iris"
 	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/services"
 )
 
 type BidController struct {
@@ -11,7 +11,7 @@ type BidController struct {
 }
 
 func NewBidController() *BidController {
-	
+
 	return &BidController{BidService: services.NewBidService()}
 }
 
@@ -24,8 +24,8 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 		return
 	}
 
-	err := bc.BidService.CreateBid(bid)	
-	
+	err := bc.BidService.CreateBid(bid)
+
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
 		ctx.JSON(iris.Map{"error": err.Error()})
@@ -42,5 +42,5 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 		return
 	}
 
-	ctx.JSON(iris.Map{"data" : bid})
+	ctx.JSON(iris.Map{"data": bid})
 }

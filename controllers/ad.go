@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/shatvl/flatwindow/services"
 	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/services"
 
 	"github.com/kataras/iris"
 )
@@ -12,10 +12,9 @@ type AdController struct {
 }
 
 func NewAdController() *AdController {
-	
+
 	return &AdController{AdService: services.NewAdService()}
 }
-
 
 func (ac *AdController) GetProductsHandler(ctx iris.Context) {
 	request := &models.AdFilterRequest{}
@@ -25,7 +24,7 @@ func (ac *AdController) GetProductsHandler(ctx iris.Context) {
 		ctx.JSON(iris.Map{"error": err.Error()})
 		return
 	}
-	
+
 	ads, count, err := ac.AdService.Repo.GetAdsWithFilter(request)
 
 	if err != nil {

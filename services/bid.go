@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/shatvl/flatwindow/repositories"
 	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/repositories"
 )
 
 // BidService for bid management
@@ -20,7 +20,7 @@ func NewBidService() *BidService {
 }
 
 // CreateAd creates or updates ad for t-s ads
-func (bs *BidService) CreateBid(bid *models.Bid) (error) {
+func (bs *BidService) CreateBid(bid *models.Bid) error {
 	return bs.Repo.CreateBid(bid)
 }
 

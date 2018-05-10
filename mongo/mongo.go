@@ -1,11 +1,11 @@
 package mongo
 
 import (
-	"sync"
 	"log"
+	"sync"
 
-	"gopkg.in/mgo.v2"
 	"github.com/shatvl/flatwindow/config"
+	"gopkg.in/mgo.v2"
 )
 
 // Adapter is the layer for working with mongo session
@@ -21,8 +21,8 @@ func InitIndexes() {
 	session := Session()
 	defer session.Close()
 
-	if err := session.DB(config.Db).C("ads").EnsureIndex(mgo.Index{Key: []string{"$text:body"}}); err != nil { 
-		log.Fatal(err.Error(), err) 
+	if err := session.DB(config.Db).C("ads").EnsureIndex(mgo.Index{Key: []string{"$text:body"}}); err != nil {
+		log.Fatal(err.Error(), err)
 	}
 }
 

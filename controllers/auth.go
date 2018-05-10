@@ -1,12 +1,12 @@
 package controllers
 
-	import (
-		"github.com/shatvl/flatwindow/models"
-		"github.com/shatvl/flatwindow/services"
+import (
+	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/services"
 
-		"github.com/kataras/iris"
-		"github.com/shatvl/flatwindow/helpers"
-	)
+	"github.com/kataras/iris"
+	"github.com/shatvl/flatwindow/helpers"
+)
 
 // AuthController provides login, register api
 type AuthController struct {

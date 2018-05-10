@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"errors"
-	
+
 	"github.com/shatvl/flatwindow/config"
 	"github.com/shatvl/flatwindow/models"
 	"github.com/shatvl/flatwindow/mongo"
@@ -25,7 +25,7 @@ func NewUserRepository() *UserRepository {
 func (r *UserRepository) Create(user *models.User) (*models.User, error) {
 	session := mongo.Session()
 	defer session.Close()
-	
+
 	_, err := r.FindByEmail(user.Email)
 
 	if err == nil || string(user.Password) == "" || user.Email == "" {

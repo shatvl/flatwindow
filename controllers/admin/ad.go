@@ -1,11 +1,11 @@
 package adminc
 
 import (
+	"github.com/dgrijalva/jwt-go"
 	"github.com/kataras/iris"
+	"github.com/shatvl/flatwindow/helpers"
 	"github.com/shatvl/flatwindow/models"
 	"github.com/shatvl/flatwindow/services"
-	"github.com/shatvl/flatwindow/helpers"
-	"github.com/dgrijalva/jwt-go"
 )
 
 type AdController struct {

@@ -4,8 +4,8 @@ import (
 	"errors"
 
 	"github.com/shatvl/flatwindow/config"
-	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/mongo"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -37,7 +37,7 @@ func NewAdRepository() *AdRepository {
 }
 
 // Create user by json body
-func (r *AdRepository) CreateAd(ad *models.Ad) (error) {
+func (r *AdRepository) CreateAd(ad *models.Ad) error {
 	session := mongo.Session()
 	defer session.Close()
 
@@ -54,15 +54,15 @@ func (r *AdRepository) FindByTypeAndUID(t byte, uid string) (*models.Ad, error) 
 	defer session.Close()
 
 	switch t {
-		case TsType:
-			ad := models.Ad{}
-			err := session.DB(config.Db).C(r.collName).Find(bson.M{"agentType": t, "unid": uid}).One(&ad)
-			
-			if err != nil {
-				return nil, err
-			}
-			
-			return &ad, nil
+	case TsType:
+		ad := models.Ad{}
+		err := session.DB(config.Db).C(r.collName).Find(bson.M{"agentType": t, "unid": uid}).One(&ad)
+
+		if err != nil {
+			return nil, err
+		}
+
+		return &ad, nil
 	}
 
 	return nil, nil
@@ -73,7 +73,7 @@ func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*mode
 	defer session.Close()
 
 	//q := minquery.New(session.DB(config.Db), r.collName, bson.M{"rooms": rooms}).Sort("_id").Limit(5)
-	ads := make([]*models.Ad,0)
+	ads := make([]*models.Ad, 0)
 
 	query := getFilterQuery(&filter.Filter)
 
@@ -87,7 +87,7 @@ func (r *AdRepository) GetAdById(_id string) (*models.Ad, error) {
 	if !bson.IsObjectIdHex(_id) {
 		return nil, errors.New(`Invalid _id`)
 	}
-	
+
 	session := mongo.Session()
 	defer session.Close()
 
@@ -116,21 +116,21 @@ func (r *AdRepository) GetAdsForFeedByAgentCode(code string) ([]*models.Ad, erro
 	session := mongo.Session()
 	defer session.Close()
 
-	ads := make([]*models.Ad,0)
+	ads := make([]*models.Ad, 0)
 
 	err := session.DB(config.Db).C(r.collName).Find(bson.M{"rss." + code: true}).All(&ads)
 
 	return ads, err
 }
 
-func getFilterQuery(filter *models.AdFilter) (*bson.M){
+func getFilterQuery(filter *models.AdFilter) *bson.M {
 	query := bson.M{}
 
 	if filter.AgentType != 0 {
 		query["agentType"] = bson.M{"$eq": filter.AgentType}
 	}
 	if filter.Rooms != 0 {
-		query["rooms"] = bson.M{"$gt": filter.Rooms}	
+		query["rooms"] = bson.M{"$gt": filter.Rooms}
 	}
 	if filter.MinPrice != 0 && filter.MaxPrice != 0 {
 		query["price"] = bson.M{"$gte": filter.MinPrice, "$lte": filter.MaxPrice}

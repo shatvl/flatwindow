@@ -1,8 +1,8 @@
 package parsers
 
 import (
-	"github.com/shatvl/flatwindow/services"
 	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/services"
 
 	"encoding/xml"
 	"fmt"
@@ -10,7 +10,7 @@ import (
 )
 
 // Tvoya Stolica parser
-type TSParser struct{
+type TSParser struct {
 	AdService *services.AdService
 }
 
@@ -39,5 +39,3 @@ func (ts *TSParser) Parse() {
 		ts.AdService.CreateAd(&uedb.Records.Records[i], repositories.TsType)
 	}
 }
-
-

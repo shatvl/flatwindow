@@ -3,11 +3,11 @@ package services
 import (
 	"fmt"
 
-	"github.com/shatvl/flatwindow/mongo"
+	"errors"
 	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/repositories"
 	"gopkg.in/mgo.v2/bson"
-	"errors"
 )
 
 // AdService for ad management
@@ -25,16 +25,16 @@ func NewAdService() *AdService {
 }
 
 // CreateAd creates or updates ad for t-s ads
-func (s *AdService) CreateAd(ad *models.Ad, agentType byte) (error) {
+func (s *AdService) CreateAd(ad *models.Ad, agentType byte) error {
 	session := mongo.Session()
 	defer session.Close()
-	
+
 	foundAd, err := s.Repo.FindByTypeAndUID(agentType, ad.Unid)
 
 	if err == nil {
 		fmt.Println("Ad is found: " + foundAd.Unid)
 		return nil
-	}		
+	}
 
 	err = s.Repo.CreateAd(ad)
 

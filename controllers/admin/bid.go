@@ -1,9 +1,9 @@
 package adminc
 
 import (
+	"github.com/dgrijalva/jwt-go"
 	"github.com/kataras/iris"
 	"github.com/shatvl/flatwindow/helpers"
-	"github.com/dgrijalva/jwt-go"
 	"github.com/shatvl/flatwindow/models"
 	"github.com/shatvl/flatwindow/services"
 )
@@ -35,7 +35,6 @@ func (bc *BidController) GetBidsHandler(ctx iris.Context) {
 		ctx.JSON(iris.Map{"error": err.Error()})
 		return
 	}
-
 
 	bids, count, err := bc.BidService.GetPaginatedBids(request)
 

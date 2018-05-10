@@ -2,13 +2,13 @@ package routes
 
 import (
 	"fmt"
-	"github.com/kataras/iris"
-	"github.com/shatvl/flatwindow/controllers"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/iris-contrib/middleware/cors"
 	jwtmiddleware "github.com/iris-contrib/middleware/jwt"
-	"github.com/shatvl/flatwindow/config"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
+	"github.com/shatvl/flatwindow/config"
+	"github.com/shatvl/flatwindow/controllers"
 	"github.com/shatvl/flatwindow/controllers/admin"
 	"github.com/shatvl/flatwindow/middleware"
 )
@@ -20,7 +20,7 @@ func DeclareRoutes(app *iris.Application) {
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
-		AllowedMethods: []string{"GET", "POST", "HEAD", "OPTIONS", "PUT"},
+		AllowedMethods:   []string{"GET", "POST", "HEAD", "OPTIONS", "PUT"},
 	})
 
 	//Enable jwt middleware
@@ -43,7 +43,7 @@ func DeclareRoutes(app *iris.Application) {
 	}
 
 	api := app.Party("/api", crs).AllowMethods(iris.MethodOptions)
-	{			
+	{
 		api.Post("/products", controllers.NewAdController().GetProductsHandler)
 		api.Get("/product/{_id:string}", controllers.NewAdController().GetProductHandler)
 		api.Post("/bid", controllers.NewBidController().BidAdHandler)

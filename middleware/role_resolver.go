@@ -1,15 +1,15 @@
 package middleware
 
 import (
-	"github.com/kataras/iris"
-	"github.com/shatvl/flatwindow/helpers"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/kataras/iris"
 	"github.com/shatvl/flatwindow/config"
+	"github.com/shatvl/flatwindow/helpers"
 )
 
-func AgentRoleResolverMiddleware(ctx iris.Context)  {
+func AgentRoleResolverMiddleware(ctx iris.Context) {
 	println("Role resolver middleware")
-	token, err :=helpers.RetrieveTokenFromRequest(ctx.Request())
+	token, err := helpers.RetrieveTokenFromRequest(ctx.Request())
 
 	if err != nil {
 		ctx.StatusCode(iris.StatusUnauthorized)

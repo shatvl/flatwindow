@@ -1,9 +1,9 @@
 package helpers
 
 import (
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
-	"fmt"
 	"github.com/shatvl/flatwindow/config"
 	"net/http"
 )

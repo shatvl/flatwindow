@@ -97,7 +97,6 @@ func (s *UserService) GenerateToken(credentials *models.Credentials) (string, *m
 	return t, foundUser, err
 }
 
-
 func (s *UserService) CreateUser(u *models.User) (*models.User, error) {
 	return s.Repo.Create(u)
 }

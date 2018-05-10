@@ -1,11 +1,12 @@
 package jobs
 
 import (
-	"github.com/shatvl/flatwindow/services"
-	"github.com/shatvl/flatwindow/repositories"
-	"os"
 	"encoding/xml"
 	"github.com/shatvl/flatwindow/models"
+	"github.com/shatvl/flatwindow/repositories"
+	"github.com/shatvl/flatwindow/services"
+	"os"
+	"fmt"
 )
 
 type Feed struct {
@@ -17,7 +18,7 @@ func NewFeed() *Feed {
 }
 
 type XmlFeed struct {
-	XMLName xml.Name    `xml:"records"`
+	XMLName xml.Name     `xml:"records"`
 	Records []*models.Ad `xml:"record"`
 }
 
@@ -28,6 +29,8 @@ func (f *Feed) CreateFeed(agentType string) {
 		if err != nil {
 			return
 		}
+
+		fmt.Println(ads)
 
 		xmlFeed := &XmlFeed{Records: ads}
 		adsXml, err := xml.MarshalIndent(xmlFeed, " ", "  ")
