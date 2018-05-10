@@ -13,7 +13,7 @@ RUN go-wrapper install
 # Set the PORT environment variable
 ENV PORT 8082
 
-# Expose port 8082 to the host so that outer-world can access your application
+# Expose port 8082 to the Host so that outer-world can access your application
 EXPOSE 8082
 
 # Tell Docker what command to run when the container starts
