@@ -2,22 +2,21 @@
 # and a workspace (GOPATH) configured at /go.
 FROM golang:alpine
 
-RUN mkdir -p /go/src/flatwindow-backend
-WORKDIR /go/src/flatwindow-backend
-COPY . /go/src/flatwindow-backend
-
-# Download and install third party dependencies into the container.
-RUN go-wrapper download
-RUN go-wrapper install
-
-# Set the PORT environment variable
+# Set env variables
 ENV PORT 8082
 
-# Expose port 8082 to the Host so that outer-world can access your application
+ADD . /go/src/github.com/shatvl/flatwindow
+
+# Build the outyet command inside the container.
+# (You may fetch or manage dependencies here,
+# either manually or with a tool like "godep".)
+RUN go install github.com/shatvl/flatwindow
+
+# Run the outyet command by default when the container starts.
+ENTRYPOINT /go/bin/flatwindow
+
+# Document that the service listens on port 8082.
 EXPOSE 8082
 
-# Tell Docker what command to run when the container starts
-CMD ["go-wrapper", "run"]
-
 # docker build ./ -t flatwindow.
-# docker run --publish 6060:8082 --name flatwindow --rm flatwindow
+# docker run --publish 6060:8082 --name flatwindow --rm flatwindow 
