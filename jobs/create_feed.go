@@ -6,6 +6,7 @@ import (
 	"github.com/shatvl/flatwindow/repositories"
 	"github.com/shatvl/flatwindow/services"
 	"os"
+	"fmt"
 )
 
 type Feed struct {
@@ -33,13 +34,20 @@ func (f *Feed) CreateFeed(agentType string) {
 		adsXml, err := xml.MarshalIndent(xmlFeed, " ", "  ")
 
 		if err != nil {
+			fmt.Println(err.Error())
 			return
+		}
+
+		if _, err := os.Stat("public/xml/" + agentType); err != nil {
+			fmt.Println(err.Error())
+			os.MkdirAll("public/xml/" + agentType, os.ModeDir)
 		}
 
 		fout, err := os.Create("public/xml/" + agentType + "/" + name + "_feed.xml")
 		defer fout.Close()
 
 		if err != nil {
+			fmt.Println(err.Error())
 			return
 		}
 
