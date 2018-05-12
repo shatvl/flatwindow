@@ -3,6 +3,6 @@
 ./flatwindow.exe
 ./*.xml
 ./.idea
-.idea
+.idea/
 vendor
 flatwindow.exe
