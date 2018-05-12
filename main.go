@@ -1,22 +1,20 @@
 package main
 
 import (
-	"github.com/jasonlvhit/gocron"
 	"github.com/kataras/iris"
-	"github.com/shatvl/flatwindow/jobs"
-	"github.com/shatvl/flatwindow/mongo"
-	"github.com/shatvl/flatwindow/parsers"
-	"github.com/shatvl/flatwindow/repositories"
 	"github.com/shatvl/flatwindow/routes"
-	"github.com/shatvl/flatwindow/seed"
 	"gopkg.in/mgo.v2"
 	"log"
-	"os"
+	"github.com/shatvl/flatwindow/mongo"
+	"github.com/shatvl/flatwindow/seed"
+	"github.com/jasonlvhit/gocron"
+	"github.com/shatvl/flatwindow/jobs"
+	"github.com/shatvl/flatwindow/repositories"
 )
 
 func main() {
 	app := iris.New()
-	session, err := mgo.Dial("mongodb://shatvl:1234@ds135399.mlab.com:35399/heroku_2wq19fst")
+	session, err := mgo.Dial("mongodb://bkn_admin:bkn_admin_password@185.66.68.84:27017/bkn")
 	if err != nil {
 		log.Fatal("Cannot Dial Mongo: ", err)
 	}
@@ -35,7 +33,7 @@ func main() {
 
 	seed.SeedAgents()
 
-	gocron.Every(1).Day().At("19:00").Do(parsers.NewTSParser().Parse)
+	//gocron.Every(30).Seconds().Do(parsers.NewTSParser().Parse)
 	gocron.Every(30).Seconds().Do(jobs.NewFeed().CreateFeed, repositories.FeedTypeToName[repositories.TsType])
 	gocron.Start()
 
@@ -44,9 +42,9 @@ func main() {
 		ctx.Text("Works fine")
 	})
 
-	port := os.Getenv("PORT")
+	//port := os.Getenv("PORT")
 	app.Run(
-		iris.Addr(":"+port),
+		iris.Addr(":" + "5000"),
 		iris.WithoutServerError(iris.ErrServerClosed),
 		iris.WithoutVersionChecker,
 		iris.WithOptimizations,

@@ -6,7 +6,6 @@ import (
 	"github.com/shatvl/flatwindow/repositories"
 	"github.com/shatvl/flatwindow/services"
 	"os"
-	"fmt"
 )
 
 type Feed struct {
@@ -29,8 +28,6 @@ func (f *Feed) CreateFeed(agentType string) {
 		if err != nil {
 			return
 		}
-
-		fmt.Println(ads)
 
 		xmlFeed := &XmlFeed{Records: ads}
 		adsXml, err := xml.MarshalIndent(xmlFeed, " ", "  ")
