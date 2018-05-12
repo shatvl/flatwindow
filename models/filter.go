@@ -15,7 +15,7 @@ type AdFilter struct {
 	Rooms     byte    `json:"rooms,string"`
 	Text      string  `json:"text"`
 	AgentType byte    `json:"agentType,string"`
-	Sort      int 	  `json:"sort"`
+	Sort      int 	  `json:"sort,string"`
 }
 
 type AdFilterRequest struct {
