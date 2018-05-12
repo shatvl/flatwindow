@@ -1,5 +1,12 @@
 package models
 
+const (
+	LowPrice = iota + 1
+	HighPrice
+	Popular
+	Best
+)
+
 type AdFilter struct {
 	Location  string  `json:"location"`
 	MinPrice  float32 `json:"minPrice,string"`
@@ -8,6 +15,7 @@ type AdFilter struct {
 	Rooms     byte    `json:"rooms,string"`
 	Text      string  `json:"text"`
 	AgentType byte    `json:"agentType,string"`
+	Sort      int 	  `json:"sort"`
 }
 
 type AdFilterRequest struct {

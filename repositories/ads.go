@@ -76,8 +76,16 @@ func (r *AdRepository) GetAdsWithFilter(filter *models.AdFilterRequest) ([]*mode
 	ads := make([]*models.Ad, 0)
 
 	query := getFilterQuery(&filter.Filter)
+	sort := getSortQuery(&filter.Filter)
 
-	session.DB(config.Db).C(r.collName).Find(&query).Limit(filter.Paginate.PerPage).Skip(int(filter.Paginate.Page * filter.Paginate.PerPage)).All(&ads)
+	q := session.DB(config.Db).C(r.collName).Find(&query).Limit(filter.Paginate.PerPage).Skip(int(filter.Paginate.Page * filter.Paginate.PerPage))
+
+	if sort != "" {
+		q.Sort(sort)
+	}
+
+	q.All(&ads)
+
 	count, _ := session.DB(config.Db).C(r.collName).Find(&query).Count()
 
 	return ads, count, nil
@@ -144,4 +152,21 @@ func getFilterQuery(filter *models.AdFilter) *bson.M {
 	}
 
 	return &query
+}
+
+func getSortQuery(filter *models.AdFilter) string {
+	var sort = ""
+
+	if filter.Sort != 0 {
+		switch filter.Sort {
+		case models.LowPrice:
+			sort = "price"
+			break
+		case models.HighPrice:
+			sort = "-price"
+			break
+		}
+	}
+
+	return sort
 }

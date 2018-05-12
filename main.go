@@ -5,13 +5,13 @@ import (
 	"github.com/shatvl/flatwindow/routes"
 	"gopkg.in/mgo.v2"
 	"log"
-	"os"
 	"github.com/shatvl/flatwindow/mongo"
 	"github.com/shatvl/flatwindow/seed"
 	"github.com/jasonlvhit/gocron"
 	"github.com/shatvl/flatwindow/jobs"
 	"github.com/shatvl/flatwindow/parsers"
 	"github.com/shatvl/flatwindow/repositories"
+	"os"
 )
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
 	seed.SeedAgents()
 
 	gocron.Every(1).Day().At("17:30").Do(parsers.NewTSParser().Parse)
-	gocron.Every(1).Hour().Do(jobs.NewFeed().CreateFeed, repositories.FeedTypeToName[repositories.TsType])
+	gocron.Every(30).Seconds().Do(jobs.NewFeed().CreateFeed, repositories.FeedTypeToName[repositories.TsType])
 	gocron.Start()
 
 	//Index route for check if build works fine
