@@ -1,5 +1,8 @@
-vendor
-Procfile
-flatwindow.exe
-*.xml
+./vendor
+./Procfile
+./flatwindow.exe
+./*.xml
+./.idea
 .idea
+vendor
+flatwindow.exe
