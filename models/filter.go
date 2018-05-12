@@ -2,12 +2,12 @@ package models
 
 type AdFilter struct {
 	Location  string  `json:"location"`
-	MinPrice  float32 `json:"minPrice"`
-	MaxPrice  float32 `json:"maxPrice"`
-	Type      byte    `json:"type"`
-	Rooms     byte    `json:"rooms"`
+	MinPrice  float32 `json:"minPrice,string"`
+	MaxPrice  float32 `json:"maxPrice,string"`
+	Type      byte    `json:"type,string"`
+	Rooms     byte    `json:"rooms,string"`
 	Text      string  `json:"text"`
-	AgentType byte    `json:"agentType"`
+	AgentType byte    `json:"agentType,string"`
 }
 
 type AdFilterRequest struct {
