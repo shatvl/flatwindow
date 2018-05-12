@@ -7,7 +7,7 @@ ENV PORT 8082
 
 ADD . /go/src/github.com/shatvl/flatwindow
 
-# Build the outyet command inside the container.
+# Build the outyet command insi de the container.
 # (You may fetch or manage dependencies here,
 # either manually or with a tool like "godep".)
 RUN go install github.com/shatvl/flatwindow
