@@ -35,7 +35,7 @@ func DeclareRoutes(app *iris.Application) {
 		SigningMethod: jwt.SigningMethodHS256,
 	})
 
-	auth := app.Party("/auth", crs).AllowMethods(iris.MethodOptions)
+	auth := app.Party("/api/auth", crs).AllowMethods(iris.MethodOptions)
 	{
 		auth.Post("/register", controllers.NewAuthController().RegisterHandler)
 		auth.Post("/login", controllers.NewAuthController().LoginHandler)
