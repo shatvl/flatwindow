@@ -1,10 +1,7 @@
 ./vendor
-./Procfile
-./flatwindow.exe
 ./*.xml
 ./.idea
 .idea/
 vendor
-/public
 public
 flatwindow.exe

@@ -59,7 +59,7 @@ func (smtp *Smtp) SendBidRequestMail() error {
 
 	// the recipient(s).
 	to := []string{"vladislav.shatilenya@gmail.com", "maxxporoshin@gmail.com"}
-	body, err := parseTemplate("../templates/mails/bid.html", map[string]string{"username": "Vlad"})
+	body, err := parseTemplate("templates/mails/bid.html", map[string]string{"username": "Vlad"})
 
 	if err != nil {
 		return err
