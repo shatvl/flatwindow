@@ -19,7 +19,6 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 	bid := &models.Bid{}
 
 	if err := ctx.ReadJSON(bid); err != nil {
-		ctx.StatusCode(iris.StatusBadRequest)
 		ctx.JSON(iris.Map{"error": err.Error()})
 		return
 	}
@@ -27,7 +26,6 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 	err := bc.BidService.CreateBid(bid)
 
 	if err != nil {
-		ctx.StatusCode(iris.StatusBadRequest)
 		ctx.JSON(iris.Map{"error": err.Error()})
 		return
 	}
@@ -37,7 +35,6 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 	}
 
 	if err != nil {
-		ctx.StatusCode(iris.StatusBadRequest)
 		ctx.JSON(iris.Map{"error": err.Error()})
 		return
 	}
