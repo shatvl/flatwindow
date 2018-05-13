@@ -31,7 +31,7 @@ func (bc *BidController) BidAdHandler(ctx iris.Context) {
 	}
 
 	if bid.CopyEmail {
-		err = services.NewSmtpMailer().SendBidRequestMail()
+		//err = services.NewSmtpMailer().SendBidRequestMail()
 	}
 
 	if err != nil {
