@@ -18,5 +18,5 @@ ENTRYPOINT /go/bin/flatwindow
 # Document that the service listens on port 8082.
 EXPOSE 8082
 
-# docker build ./ -t flatwindow.
-# docker run --publish 6060:8082 --name flatwindow --rm flatwindow 
+# docker build ./ -t flatwindow
+# docker run --publish 8082:8082 --name flatwindow --rm flatwindow
