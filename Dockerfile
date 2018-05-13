@@ -10,11 +10,10 @@ ADD . /go/src/github.com/shatvl/flatwindow
 # Build the outyet command insi de the container.
 # (You may fetch or manage dependencies here,
 # either manually or with a tool like "godep".)
-RUN go install github.com/shatvl/flatwindow
+RUN go build
 
 # Run the outyet command by default when the container starts.
-ENTRYPOINT /go/bin/flatwindow
-
+ENTRYPOINT /go/src/github.com/shatvl/flatwindow/flatwindow
 # Document that the service listens on port 8082.
 EXPOSE 8082
 
