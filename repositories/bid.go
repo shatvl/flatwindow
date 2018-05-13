@@ -22,7 +22,18 @@ func (r *BidRepository) CreateBid(bid *models.Bid) error {
 	session := mongo.Session()
 	defer session.Close()
 
-	err := session.DB(config.Db).C(r.collName).Insert(bid)
+	var ad models.Ad
+
+	err := session.DB(config.Db).C("ads").FindId(bid.AdId).One(&ad)
+
+	if err != nil {
+		return err
+	}
+
+	bid.AdId = ad.ID
+	bid.AgentType = ad.AgentType
+
+	err = session.DB(config.Db).C(r.collName).Insert(bid)
 
 	return err
 }

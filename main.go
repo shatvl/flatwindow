@@ -36,7 +36,7 @@ func main() {
 	seed.SeedAgents()
 
 	gocron.Every(1).Day().At("17:30").Do(parsers.NewTSParser().Parse)
-	gocron.Every(30).Seconds().Do(jobs.NewFeed().CreateFeed, repositories.FeedTypeToName[repositories.TsType])
+	gocron.Every(1).Hour().Do(jobs.NewFeed().CreateFeed, repositories.FeedTypeToName[repositories.TsType])
 	gocron.Start()
 
 	//Index route for check if build works fine
