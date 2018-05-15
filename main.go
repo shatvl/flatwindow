@@ -16,7 +16,7 @@ import (
 
 func main() {
 	app := iris.New()
-	session, err := mgo.Dial("mongodb://bkn_admin:bkn_admin_password@185.66.68.84:27017/bkn")
+	session, err := mgo.Dial("mongodb://" + config.MongoUser + ":" + config.MongoPassword + "@" + config.MongoHost + "/" + config.Db)
 	if err != nil {
 		log.Fatal("Cannot Dial Mongo: ", err)
 	}
