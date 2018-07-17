@@ -35,7 +35,6 @@ func NewSmtpMailer() *Smtp {
 	config := mailer.Config{
 		Host:     "smtp.gmail.com",
 		Username: "shatilenya95@gmail.com",
-		Password: "77777",
 		FromAddr: "shatilenya95@gmail.com",
 		Port:     587,
 		// Enable UseCommand to support sendmail unix command,
